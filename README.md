@@ -1,4 +1,4 @@
-HW1
+*HW1*
 
 Check elements in HomePage https://epam.github.io/JDI/
 
