@@ -4,7 +4,7 @@
     <test name="Check Annotations">
 
         <classes>
-            <class name="hw2.exercise3.HomePageAnnotation" />
+            <class name="hw2.exercise3.HomePageAnnotations" />
         </classes>
 
     </test>

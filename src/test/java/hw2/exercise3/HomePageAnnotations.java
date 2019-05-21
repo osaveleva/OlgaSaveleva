@@ -12,7 +12,7 @@ import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class HomePageAnnotation {
+public class HomePageAnnotations {
     private WebDriver driver;
 
     @BeforeSuite
