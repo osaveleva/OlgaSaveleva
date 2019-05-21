@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
@@ -13,22 +13,48 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class HomePageAnnotation {
+    private WebDriver driver;
+
+    @BeforeSuite
+    public void beforeSuite(){
+        setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+    }
+
+    @BeforeClass
+    public void beforeClass(){
+        driver = new ChromeDriver();
+    }
+
+    @BeforeMethod
+    public void beforeMethod(){
+        driver.manage().window().maximize();
+    }
+
+    @AfterMethod
+    public void afterMethod(){
+        System.out.println(driver.getTitle());
+    }
+
+    @AfterClass
+    public void afterClass(){
+        driver.close();
+    }
+
+    @AfterSuite
+    public void afterSuite(){
+        System.out.println(System.currentTimeMillis());
+    }
 
     @Test
     public void checkHomePage(){
-        setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
-        //1. Open BR
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
-        //2. Open test site by URL
+        //1. Open test site by URL
         driver.navigate().to("https://epam.github.io/JDI/");
 
-        //3. Assert browser title
+        //2. Assert browser title
         assertEquals(driver.getTitle(),"Home Page");
 
-        //4. Perform login
+        //3. Perform login
         driver.findElement(By.cssSelector(".profile-photo")).click();
         driver.findElement(By.cssSelector("#name")).sendKeys("epam");
         driver.findElement(By.cssSelector("#password")).sendKeys("1234");
@@ -137,9 +163,5 @@ public class HomePageAnnotation {
 
         //17. Assert that there is Footer
         assertTrue(driver.findElement(By.cssSelector(".footer-content")).isDisplayed());
-
-        //18. Close Browser
-        driver.close();
-
     }
 }

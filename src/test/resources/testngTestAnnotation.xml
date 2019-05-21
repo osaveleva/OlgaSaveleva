@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="HomeWork2">
+    <test name="Check Annotations">
+
+        <classes>
+            <class name="hw2.exercise3.HomePageAnnotation" />
+        </classes>
+
+    </test>
+</suite>
