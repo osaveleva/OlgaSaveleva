@@ -1,4 +1,4 @@
-package hw2;
+package hw2.exercise2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +12,9 @@ import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class HomePageSmokeRegression {
+public class HomePageSmokeRegressionSimultaneously {
 
-    @Test (groups = {"Regression"})
+    @Test (groups = {"Smoke","Regression"})
     public void checkHomePageFirst(){
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
@@ -142,7 +142,7 @@ public class HomePageSmokeRegression {
         driver.close();
 
     }
-    @Test (groups = {"Regression"})
+    @Test (groups = {"Smoke","Regression"})
     public void checkHomePageSecond(){
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
@@ -270,7 +270,7 @@ public class HomePageSmokeRegression {
         driver.close();
 
     }
-    @Test (groups = {"Smoke"})
+    @Test (groups = {"Smoke","Regression"})
     public void checkHomePageThird(){
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 

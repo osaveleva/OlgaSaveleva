@@ -1,4 +1,4 @@
-package hw2;
+package hw2.exercise1;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class TextItemsAsserts {
+public class HomePageTextItems {
 
     @DataProvider(name="parallelDataProvider", parallel = true)
     public Object[][] methodDataProvider() {

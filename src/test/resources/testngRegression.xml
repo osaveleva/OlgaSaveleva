@@ -9,7 +9,7 @@
         </groups>
 
         <packages>
-            <package name="hw2" />
+            <package name="hw2.exercise2" />
         </packages>
     </test>
 </suite>
