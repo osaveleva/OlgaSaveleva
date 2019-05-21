@@ -149,7 +149,6 @@ public class HomePageAnnotations {
 
         //13. Switch to original window back
         driver.switchTo().window(mainWindowHandle);
-        String str2 = driver.getCurrentUrl();
 
         //14. Assert a text of the sub header
         WebElement subheader = driver.findElement(By.cssSelector("h3:nth-child(3)>a"));
