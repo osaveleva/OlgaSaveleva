@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.setProperty;
@@ -15,7 +16,10 @@ import static java.lang.System.setProperty;
 public class HomePageSoftAsserts {
 
     @Test
-    public void checkHomePage(){
+    public void checkHomePage() {
+        List<String> listText = Arrays.asList("To include good practices\nand ideas from successful\nEPAM project", "To be flexible and\ncustomizable", "To be multiplatform", "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
+        List<String> listMenu = Arrays.asList("Home", "Contact form", "Service", "Metals & Colors", "Elements packs");
+
         SoftAssert softAssert = new SoftAssert();
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
@@ -27,7 +31,7 @@ public class HomePageSoftAsserts {
         driver.navigate().to("https://epam.github.io/JDI/");
 
         //3. Assert browser title
-        softAssert.assertEquals(driver.getTitle(),"Home Page");
+        softAssert.assertEquals(driver.getTitle(), "Home Page");
 
         //4. Perform login
         driver.findElement(By.cssSelector(".profile-photo")).click();
@@ -40,34 +44,19 @@ public class HomePageSoftAsserts {
         softAssert.assertEquals(username.getText(), "PITER CHAILOVSKII");
 
         //6. Assert browser title
-        softAssert.assertEquals(driver.getTitle(),"Home Page");
+        softAssert.assertEquals(driver.getTitle(), "Home Page");
 
         //7. Assert that there are 4 items on the header section are displayed and they have proper texts
-        List <WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
+        List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         softAssert.assertEquals(sidebarItems.size(), 5);
 
-        WebElement homeItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(1)"));
-        softAssert.assertTrue(homeItem.isDisplayed());
-        softAssert.assertEquals(homeItem.getText(),"Home");
-
-        WebElement contactFormItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(2)"));
-        softAssert.assertTrue(contactFormItem.isDisplayed());
-        softAssert.assertEquals(contactFormItem.getText(),"Contact form");
-
-        WebElement serviceItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(3)"));
-        softAssert.assertTrue(serviceItem.isDisplayed());
-        softAssert.assertEquals(serviceItem.getText(),"Service");
-
-        WebElement metalsColorsItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(4)"));
-        softAssert.assertTrue(metalsColorsItem.isDisplayed());
-        softAssert.assertEquals(metalsColorsItem.getText(),"Metals & Colors");
-
-        WebElement elementsPacksItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(5)"));
-        softAssert.assertTrue(elementsPacksItem.isDisplayed());
-        softAssert.assertEquals(elementsPacksItem.getText(),"Elements packs");
+        List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
+        for (WebElement elementMenu : menuCollection) {
+            softAssert.assertTrue(listMenu.contains(elementMenu.getText()));
+        }
 
         //8. Assert that there are 4 images on the Index Page and they are displayed
-        List <WebElement> iconsItems = driver.findElements(By.cssSelector(".icons-benefit"));
+        List<WebElement> iconsItems = driver.findElements(By.cssSelector(".icons-benefit"));
         softAssert.assertEquals(iconsItems.size(), 4);
 
         WebElement iconPractise = driver.findElement(By.cssSelector(".icons-benefit.icon-practise"));
@@ -83,24 +72,13 @@ public class HomePageSoftAsserts {
         softAssert.assertTrue(iconBase.isDisplayed());
 
         //9. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        List <WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
+        List<WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         softAssert.assertEquals(textItems.size(), 4);
 
-        WebElement iconPractiseText = driver.findElement(By.cssSelector("div.row > div:nth-child(1) .benefit-txt"));
-        softAssert.assertTrue(iconPractiseText.isDisplayed());
-        softAssert.assertEquals(iconPractiseText.getText(), "To include good practices\nand ideas from successful\nEPAM project");
-
-        WebElement iconCustomText = driver.findElement(By.cssSelector("div.row > div:nth-child(2) .benefit-txt"));
-        softAssert.assertTrue(iconCustomText.isDisplayed());
-        softAssert.assertEquals(iconCustomText.getText(), "To be flexible and\ncustomizable");
-
-        WebElement iconMultiText = driver.findElement(By.cssSelector("div.row > div:nth-child(3) .benefit-txt"));
-        softAssert.assertTrue(iconMultiText.isDisplayed());
-        softAssert.assertEquals(iconMultiText.getText(), "To be multiplatform");
-
-        WebElement iconBaseText = driver.findElement(By.cssSelector("div.row > div:nth-child(4) .benefit-txt"));
-        softAssert.assertTrue(iconBaseText.isDisplayed());
-        softAssert.assertEquals(iconBaseText.getText(), "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
+        List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
+        for (WebElement elementText : textCollection) {
+            softAssert.assertTrue(listText.contains(elementText.getText()));
+        }
 
         //10. Assert a text of the main headers
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title.text-center"));
@@ -116,7 +94,7 @@ public class HomePageSoftAsserts {
         softAssert.assertTrue(iframe.isDisplayed());
 
         //12. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-        String mainWindowHandle=driver.getWindowHandle();
+        String mainWindowHandle = driver.getWindowHandle();
         driver.switchTo().frame(iframe);
         WebElement logo = driver.findElement(By.cssSelector("#epam_logo"));
         softAssert.assertEquals(logo.getAttribute("src"), "https://epam.github.io/JDI/images/Logo_Epam_Color.svg");

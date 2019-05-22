@@ -55,8 +55,6 @@ public class HomePageHardAsserts {
         List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         assertEquals(sidebarItems.size(), 5);
 
-        // TODO 2 Take a look on lines 52-70, from my perspective, it might be better with foreach loop,
-        // `cause you perform similar actions with all of this WebElements.
         List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         for (WebElement elementMenu : menuCollection) {
             assertTrue(listMenu.contains(elementMenu.getText()));
@@ -82,7 +80,6 @@ public class HomePageHardAsserts {
         List<WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(textItems.size(), 4);
 
-        // !TODO
         List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
         for (WebElement elementText : textCollection) {
             assertTrue(listText.contains(elementText.getText()));
