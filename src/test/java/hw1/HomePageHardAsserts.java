@@ -6,11 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
 /*
 TODO 0 Pay attention on java code convention(in each files in the solution), reformat your code by IDEA shortcut.
        Basically, you should do it whenever you push your code in git repo.
@@ -19,7 +21,11 @@ TODO 1 Where is gitignore file ? All IDE_specific_files/binaries/etc. should be 
 public class HomePageHardAsserts {
 
     @Test
-    public void checkHomePage(){
+    public void checkHomePage() {
+
+        List<String> listText = Arrays.asList("To include good practices\nand ideas from successful\nEPAM project", "To be flexible and\ncustomizable", "To be multiplatform", "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
+        List<String> listMenu = Arrays.asList("Home", "Contact form", "Service", "Metals & Colors", "Elements packs");
+
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
         //1. Open BR
@@ -30,7 +36,7 @@ public class HomePageHardAsserts {
         driver.navigate().to("https://epam.github.io/JDI/");
 
         //3. Assert browser title
-        assertEquals(driver.getTitle(),"Home Page");
+        assertEquals(driver.getTitle(), "Home Page");
 
         //4. Perform login
         driver.findElement(By.cssSelector(".profile-photo")).click();
@@ -43,37 +49,21 @@ public class HomePageHardAsserts {
         assertEquals(username.getText(), "PITER CHAILOVSKII");
 
         //6. Assert browser title
-        assertEquals(driver.getTitle(),"Home Page");
+        assertEquals(driver.getTitle(), "Home Page");
 
         //7. Assert that there are 4 items on the header section are displayed and they have proper texts
-        List <WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
+        List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         assertEquals(sidebarItems.size(), 5);
 
         // TODO 2 Take a look on lines 52-70, from my perspective, it might be better with foreach loop,
         // `cause you perform similar actions with all of this WebElements.
-        WebElement homeItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(1)"));
-        assertTrue(homeItem.isDisplayed());
-        assertEquals(homeItem.getText(),"Home");
-
-        WebElement contactFormItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(2)"));
-        assertTrue(contactFormItem.isDisplayed());
-        assertEquals(contactFormItem.getText(),"Contact form");
-
-        WebElement serviceItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(3)"));
-        assertTrue(serviceItem.isDisplayed());
-        assertEquals(serviceItem.getText(),"Service");
-
-        WebElement metalsColorsItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(4)"));
-        assertTrue(metalsColorsItem.isDisplayed());
-        assertEquals(metalsColorsItem.getText(),"Metals & Colors");
-
-        WebElement elementsPacksItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(5)"));
-        assertTrue(elementsPacksItem.isDisplayed());
-        assertEquals(elementsPacksItem.getText(),"Elements packs");
-        // !TODO 2
+        List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
+        for (WebElement elementMenu : menuCollection) {
+            assertTrue(listMenu.contains(elementMenu.getText()));
+        }
 
         //8. Assert that there are 4 images on the Index Page and they are displayed
-        List <WebElement> iconsItems = driver.findElements(By.cssSelector(".icons-benefit"));
+        List<WebElement> iconsItems = driver.findElements(By.cssSelector(".icons-benefit"));
         assertEquals(iconsItems.size(), 4);
 
         WebElement iconPractise = driver.findElement(By.cssSelector(".icons-benefit.icon-practise"));
@@ -89,26 +79,14 @@ public class HomePageHardAsserts {
         assertTrue(iconBase.isDisplayed());
 
         //9. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        List <WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
+        List<WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(textItems.size(), 4);
 
-        // TODO 3 Same story like 'TODO 2'
-        WebElement iconPractiseText = driver.findElement(By.cssSelector("div.row > div:nth-child(1) .benefit-txt"));
-        assertTrue(iconPractiseText.isDisplayed());
-        assertEquals(iconPractiseText.getText(), "To include good practices\nand ideas from successful\nEPAM project");
-
-        WebElement iconCustomText = driver.findElement(By.cssSelector("div.row > div:nth-child(2) .benefit-txt"));
-        assertTrue(iconCustomText.isDisplayed());
-        assertEquals(iconCustomText.getText(), "To be flexible and\ncustomizable");
-
-        WebElement iconMultiText = driver.findElement(By.cssSelector("div.row > div:nth-child(3) .benefit-txt"));
-        assertTrue(iconMultiText.isDisplayed());
-        assertEquals(iconMultiText.getText(), "To be multiplatform");
-
-        WebElement iconBaseText = driver.findElement(By.cssSelector("div.row > div:nth-child(4) .benefit-txt"));
-        assertTrue(iconBaseText.isDisplayed());
-        assertEquals(iconBaseText.getText(), "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
         // !TODO
+        List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
+        for (WebElement elementText : textCollection) {
+            assertTrue(listText.contains(elementText.getText()));
+        }
 
         //10. Assert a text of the main headers
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title.text-center"));
@@ -124,7 +102,7 @@ public class HomePageHardAsserts {
         assertTrue(iframe.isDisplayed());
 
         //12. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-        String mainWindowHandle=driver.getWindowHandle();
+        String mainWindowHandle = driver.getWindowHandle();
         driver.switchTo().frame(iframe);
         WebElement logo = driver.findElement(By.cssSelector("#epam_logo"));
         assertEquals(logo.getAttribute("src"), "https://epam.github.io/JDI/images/Logo_Epam_Color.svg");
