@@ -52,6 +52,7 @@ public class HomePageSoftAsserts {
 
         List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         for (WebElement elementMenu : menuCollection) {
+            softAssert.assertTrue(elementMenu.isDisplayed());
             softAssert.assertTrue(listMenu.contains(elementMenu.getText()));
         }
 
@@ -77,6 +78,7 @@ public class HomePageSoftAsserts {
 
         List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
         for (WebElement elementText : textCollection) {
+            softAssert.assertTrue(elementText.isDisplayed());
             softAssert.assertTrue(listText.contains(elementText.getText()));
         }
 

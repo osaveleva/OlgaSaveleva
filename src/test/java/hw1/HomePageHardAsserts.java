@@ -13,11 +13,7 @@ import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-/*
-TODO 0 Pay attention on java code convention(in each files in the solution), reformat your code by IDEA shortcut.
-       Basically, you should do it whenever you push your code in git repo.
-TODO 1 Where is gitignore file ? All IDE_specific_files/binaries/etc. should be ignored.
- */
+
 public class HomePageHardAsserts {
 
     @Test
@@ -57,6 +53,7 @@ public class HomePageHardAsserts {
 
         List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         for (WebElement elementMenu : menuCollection) {
+            assertTrue(elementMenu.isDisplayed());
             assertTrue(listMenu.contains(elementMenu.getText()));
         }
 
@@ -82,6 +79,7 @@ public class HomePageHardAsserts {
 
         List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
         for (WebElement elementText : textCollection) {
+            assertTrue(elementText.isDisplayed());
             assertTrue(listText.contains(elementText.getText()));
         }
 

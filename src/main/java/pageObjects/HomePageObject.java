@@ -7,28 +7,28 @@ import java.util.List;
 
 public class HomePageObject {
 
-    @FindBy (css = ".profile-photo")
+    @FindBy(css = ".profile-photo")
     private WebElement profileButton;
 
-    @FindBy (css = "#name")
+    @FindBy(css = "#name")
     private WebElement nameField;
 
-    @FindBy (css = "#password")
+    @FindBy(css = "#password")
     private WebElement passwordField;
 
-    @FindBy (css = "#login-button")
+    @FindBy(css = "#login-button")
     private WebElement loginButton;
 
-    @FindBy (css = "#user-name")
+    @FindBy(css = "#user-name")
     private WebElement userName;
 
-    @FindBy (css = ".sidebar-menu > li")
+    @FindBy(css = ".sidebar-menu > li")
     public List<WebElement> sidebarItems;
 
-    @FindBy (css = ".icons-benefit")
+    @FindBy(css = ".icons-benefit")
     public List<WebElement> icons;
 
-    @FindBy (css = ".benefit-txt")
+    @FindBy(css = ".benefit-txt")
     public List<WebElement> textItems;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Service']")
@@ -58,17 +58,8 @@ public class HomePageObject {
     @FindBy(css = ".icons-benefit.icon-base")
     public WebElement iconBase;
 
-    @FindBy(css = "div.row > div:nth-child(1) .benefit-txt")
-    public WebElement iconPractiseText;
-
-    @FindBy(css = "div.row > div:nth-child(2) .benefit-txt")
-    public WebElement iconCustomText;
-
-    @FindBy(css = "div.row > div:nth-child(3) .benefit-txt")
-    public WebElement iconMultiText;
-
-    @FindBy(css = "div.row > div:nth-child(4) .benefit-txt")
-    public WebElement iconBaseText;
+    @FindBy(css = "div.row > div .benefit-txt")
+    public List<WebElement> textCollection;
 
     @FindBy(css = "h3.main-title.text-center")
     public WebElement mainHeader;
@@ -91,7 +82,7 @@ public class HomePageObject {
     @FindBy(css = ".footer-content")
     public WebElement footer;
 
-    public void login(String name, String password){
+    public void login(String name, String password) {
         profileButton.click();
         nameField.sendKeys(name);
         passwordField.sendKeys(password);
@@ -102,7 +93,7 @@ public class HomePageObject {
         return userName.getText();
     }
 
-    public int getListSize(List<WebElement> list){
+    public int getListSize(List<WebElement> list) {
         return list.size();
     }
 }
