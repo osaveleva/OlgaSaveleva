@@ -11,7 +11,11 @@ import java.util.List;
 import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
+/*
+TODO 0 Pay attention on java code convention(in each files in the solution), reformat your code by IDEA shortcut.
+       Basically, you should do it whenever you push your code in git repo.
+TODO 1 Where is gitignore file ? All IDE_specific_files/binaries/etc. should be ignored.
+ */
 public class HomePageHardAsserts {
 
     @Test
@@ -45,6 +49,8 @@ public class HomePageHardAsserts {
         List <WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         assertEquals(sidebarItems.size(), 5);
 
+        // TODO 2 Take a look on lines 52-70, from my perspective, it might be better with foreach loop,
+        // `cause you perform similar actions with all of this WebElements.
         WebElement homeItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(1)"));
         assertTrue(homeItem.isDisplayed());
         assertEquals(homeItem.getText(),"Home");
@@ -64,6 +70,7 @@ public class HomePageHardAsserts {
         WebElement elementsPacksItem = driver.findElement(By.cssSelector(".sidebar-menu > li:nth-child(5)"));
         assertTrue(elementsPacksItem.isDisplayed());
         assertEquals(elementsPacksItem.getText(),"Elements packs");
+        // !TODO 2
 
         //8. Assert that there are 4 images on the Index Page and they are displayed
         List <WebElement> iconsItems = driver.findElements(By.cssSelector(".icons-benefit"));
@@ -85,6 +92,7 @@ public class HomePageHardAsserts {
         List <WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(textItems.size(), 4);
 
+        // TODO 3 Same story like 'TODO 2'
         WebElement iconPractiseText = driver.findElement(By.cssSelector("div.row > div:nth-child(1) .benefit-txt"));
         assertTrue(iconPractiseText.isDisplayed());
         assertEquals(iconPractiseText.getText(), "To include good practices\nand ideas from successful\nEPAM project");
@@ -100,6 +108,7 @@ public class HomePageHardAsserts {
         WebElement iconBaseText = driver.findElement(By.cssSelector("div.row > div:nth-child(4) .benefit-txt"));
         assertTrue(iconBaseText.isDisplayed());
         assertEquals(iconBaseText.getText(), "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
+        // !TODO
 
         //10. Assert a text of the main headers
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title.text-center"));
