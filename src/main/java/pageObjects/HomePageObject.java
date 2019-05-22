@@ -23,42 +23,73 @@ public class HomePageObject {
     private WebElement userName;
 
     @FindBy (css = ".sidebar-menu > li")
-    private List<WebElement> sidebarItems;
+    public List<WebElement> sidebarItems;
+
+    @FindBy (css = ".icons-benefit")
+    public List<WebElement> icons;
+
+    @FindBy (css = ".benefit-txt")
+    public List<WebElement> textItems;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Service']")
-    private WebElement itemService;
+    public WebElement itemService;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Contact form']")
-    private WebElement itemContactForm;
+    public WebElement itemContactForm;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Home']")
-    private WebElement itemHome;
+    public WebElement itemHome;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Metals & Colors']")
-    private WebElement itemMetalsColors;
+    public WebElement itemMetalsColors;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Elements packs']")
-    private WebElement itemElementsPacks;
+    public WebElement itemElementsPacks;
 
-    public WebElement getItemService() {
-        return itemService;
-    }
+    @FindBy(css = ".icons-benefit.icon-practise")
+    public WebElement iconPractise;
 
-    public WebElement getItemContactForm() {
-        return itemContactForm;
-    }
+    @FindBy(css = ".icons-benefit.icon-multi")
+    public WebElement iconMulti;
 
-    public WebElement getItemHome() {
-        return itemHome;
-    }
+    @FindBy(css = ".icons-benefit.icon-custom")
+    public WebElement iconCustom;
 
-    public WebElement getItemMetalsColors() {
-        return itemMetalsColors;
-    }
+    @FindBy(css = ".icons-benefit.icon-base")
+    public WebElement iconBase;
 
-    public WebElement getItemElementsPacks() {
-        return itemElementsPacks;
-    }
+    @FindBy(css = "div.row > div:nth-child(1) .benefit-txt")
+    public WebElement iconPractiseText;
+
+    @FindBy(css = "div.row > div:nth-child(2) .benefit-txt")
+    public WebElement iconCustomText;
+
+    @FindBy(css = "div.row > div:nth-child(3) .benefit-txt")
+    public WebElement iconMultiText;
+
+    @FindBy(css = "div.row > div:nth-child(4) .benefit-txt")
+    public WebElement iconBaseText;
+
+    @FindBy(css = "h3.main-title.text-center")
+    public WebElement mainHeader;
+
+    @FindBy(css = "p.main-txt")
+    public WebElement textHeader;
+
+    @FindBy(css = "iframe#iframe")
+    public WebElement iframe;
+
+    @FindBy(css = "#epam_logo")
+    public WebElement logo;
+
+    @FindBy(css = "h3:nth-child(3)>a")
+    public WebElement subheader;
+
+    @FindBy(css = "#mCSB_1")
+    public WebElement leftSection;
+
+    @FindBy(css = ".footer-content")
+    public WebElement footer;
 
     public void login(String name, String password){
         profileButton.click();
@@ -71,7 +102,7 @@ public class HomePageObject {
         return userName.getText();
     }
 
-    public int getSideBarSize(){
-        return sidebarItems.size();
+    public int getListSize(List<WebElement> list){
+        return list.size();
     }
 }
