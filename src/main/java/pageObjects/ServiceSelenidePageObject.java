@@ -35,13 +35,8 @@ public class ServiceSelenidePageObject {
     public List<SelenideElement> menuCollection;
 
     @FindBy(css = ".sub > li")
-    private List<SelenideElement> subCollection;
+    public List<SelenideElement> subCollection;
 
-    @FindBy(css = ".sidebar-menu > li:nth-child(3)")
-    public SelenideElement service;
-
-    @FindBy(css = ".sidebar-menu > li:nth-child(3) li:nth-child(8) > a > span")
-    public SelenideElement differentElements;
 
     public void login(String name, String password) {
         profileButton.click();
@@ -50,11 +45,18 @@ public class ServiceSelenidePageObject {
         loginButton.click();
     }
 
+    public void clickMenuItem(List<SelenideElement> collection, String str) {
+        for (SelenideElement ele : collection) {
+            if (ele.getText().equals(str)) {
+                ele.click();
+                return;
+            }
+        }
+    }
 
-    public List<String> getSubMenuItems(){
+    public List<String> getSubMenuItems() {
         List<String> subText = new ArrayList<String>();
-        for(SelenideElement a: subCollection)
-        {
+        for (SelenideElement a : subCollection) {
             subText.add(a.getText());
         }
         return subText;

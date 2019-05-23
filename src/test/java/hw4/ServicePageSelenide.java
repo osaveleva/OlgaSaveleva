@@ -18,7 +18,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
-public class ServicePageSelenide extends TestBaseSelenide{
+public class ServicePageSelenide extends TestBaseSelenide {
 
     private ServiceSelenidePageObject servicePage;
 
@@ -30,7 +30,7 @@ public class ServicePageSelenide extends TestBaseSelenide{
     }
 
     @Test
-    public void checkServicePage(){
+    public void checkServicePage() {
         List<String> subMenuItems = Arrays.asList("Support", "Dates", "Complex Table", "Simple Table", "Table with pages", "Different elements");
 
         //1. Assert Browser title
@@ -43,11 +43,11 @@ public class ServicePageSelenide extends TestBaseSelenide{
         servicePage.userName.shouldHave(text("PITER CHAILOVSKII"));
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
-        servicePage.service.click();
+        servicePage.clickMenuItem(servicePage.menuCollection, "Service");
         assertTrue(servicePage.getSubMenuItems().containsAll(subMenuItems));
 
         //5. Open through the header menu Service -> Different Elements Page
-        servicePage.differentElements.click();
+        servicePage.clickMenuItem(servicePage.subCollection, "Different elements");
 
         //6. Check interface on Different elements page, it contains all needed elements
         $$(".label-checkbox").shouldHaveSize(4);
@@ -55,5 +55,5 @@ public class ServicePageSelenide extends TestBaseSelenide{
         $$(".colors").shouldHaveSize(1);
         $$(".main-content .uui-button").shouldHaveSize(2);
 
-       }
+    }
 }
