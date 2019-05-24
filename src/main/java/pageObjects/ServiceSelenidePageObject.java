@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -37,6 +38,18 @@ public class ServiceSelenidePageObject {
     @FindBy(css = ".sub > li")
     public List<SelenideElement> subCollection;
 
+    @FindBy(css = ".panel-body-list.logs > li")
+    private List<SelenideElement> logCollection;
+
+    //@FindBy(css = ".label-checkbox")
+    //private List<SelenideElement> checkboxCollection;
+
+    @FindBy(css = ".label-checkbox input[type ='checkbox']")
+    public List<SelenideElement> checkboxValueCollection;
+
+    @FindBy(css = ".label-radio input[type ='radio']")
+    public List<SelenideElement> radioButtonValueCollection;
+
 
     public void login(String name, String password) {
         profileButton.click();
@@ -54,12 +67,31 @@ public class ServiceSelenidePageObject {
         }
     }
 
-    public List<String> getSubMenuItems() {
+    public List<String> getSubMenuItems(List<SelenideElement> collectionList) {
         List<String> subText = new ArrayList<String>();
-        for (SelenideElement a : subCollection) {
+        for (SelenideElement a : collectionList) {
             subText.add(a.getText());
         }
         return subText;
+    }
+
+    public SelenideElement checkCheckBox(List <SelenideElement> checkCollection, String checkboxValue){
+        for (SelenideElement check: checkCollection){
+            if(check.parent().getText().equals(checkboxValue)) {
+                check.parent().click();
+                return check;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkLog(String record){
+        for (SelenideElement log: logCollection) {
+            if (log.getText().contains(record)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
