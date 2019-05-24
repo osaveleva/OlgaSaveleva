@@ -58,7 +58,11 @@ public class DatesPageSelenide extends TestBaseSelenide {
        // act.dragAndDrop(From, To).build().perform();
 
      //   $(".ui-slider-handle:nth-child(1)").dragAndDropTo("50");
+        String s = datePage.From.getText();
+        System.out.println(s);
 
+        Integer result = Integer.valueOf(s);
+        System.out.println(result);
 
     }
 }
