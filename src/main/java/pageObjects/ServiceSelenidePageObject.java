@@ -59,13 +59,6 @@ public class ServiceSelenidePageObject {
         return null;
     }
 
-    public List<String> getSubMenuItems(List<SelenideElement> collectionList) {
-        List<String> subText = new ArrayList<String>();
-        for (SelenideElement a : collectionList) {
-            subText.add(a.getText());
-        }
-        return subText;
-    }
 
     public SelenideElement checkCheckBox(List<SelenideElement> checkCollection, String checkboxValue) {
         for (SelenideElement check : checkCollection) {
