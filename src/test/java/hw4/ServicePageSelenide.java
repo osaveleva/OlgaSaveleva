@@ -28,7 +28,6 @@ public class ServicePageSelenide extends TestBaseSelenide {
 
     @Test
     public void checkServicePage() {
-        //List<String> subMenuItems = Arrays.asList("Support", "Dates", "Complex Table", "Simple Table", "Table with pages", "Different elements");
 
         //1. Assert Browser title
         assertEquals(getWebDriver().getTitle(), "Home Page");
