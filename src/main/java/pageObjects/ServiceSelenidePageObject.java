@@ -1,19 +1,13 @@
 package pageObjects;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.checked;
-import static com.codeborne.selenide.Selenide.refresh;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$$;
 
 
 public class ServiceSelenidePageObject {
@@ -35,14 +29,14 @@ public class ServiceSelenidePageObject {
     @FindBy(css = ".sidebar-menu > li")
     public List<SelenideElement> menuCollection;
 
+    @FindBy(css = ".colors > select > option")
+    public List<SelenideElement> dropdonwCollection;
+
+    @FindBy(css = ".colors")
+    public SelenideElement dropdown;
+
     @FindBy(css = ".sub > li")
     public List<SelenideElement> subCollection;
-
-    @FindBy(css = ".panel-body-list.logs > li")
-    private List<SelenideElement> logCollection;
-
-    //@FindBy(css = ".label-checkbox")
-    //private List<SelenideElement> checkboxCollection;
 
     @FindBy(css = ".label-checkbox input[type ='checkbox']")
     public List<SelenideElement> checkboxValueCollection;
@@ -58,13 +52,14 @@ public class ServiceSelenidePageObject {
         loginButton.click();
     }
 
-    public void clickMenuItem(List<SelenideElement> collection, String str) {
+    public SelenideElement clickMenuItem(List<SelenideElement> collection, String str) {
         for (SelenideElement ele : collection) {
             if (ele.getText().equals(str)) {
                 ele.click();
-                return;
+                return ele;
             }
         }
+        return null;
     }
 
     public List<String> getSubMenuItems(List<SelenideElement> collectionList) {
@@ -85,13 +80,9 @@ public class ServiceSelenidePageObject {
         return null;
     }
 
-    public boolean checkLog(String record){
-        for (SelenideElement log: logCollection) {
-            if (log.getText().contains(record)){
-                return true;
-            }
-        }
-        return false;
-    }
 
-}
+
+    public void clickDropDown() {
+        dropdown.click();
+    }
+  }
