@@ -6,9 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$$;
-
 
 public class ServiceSelenidePageObject {
     @FindBy(css = ".profile-photo")
@@ -70,9 +67,9 @@ public class ServiceSelenidePageObject {
         return subText;
     }
 
-    public SelenideElement checkCheckBox(List <SelenideElement> checkCollection, String checkboxValue){
-        for (SelenideElement check: checkCollection){
-            if(check.parent().getText().equals(checkboxValue)) {
+    public SelenideElement checkCheckBox(List<SelenideElement> checkCollection, String checkboxValue) {
+        for (SelenideElement check : checkCollection) {
+            if (check.parent().getText().equals(checkboxValue)) {
                 check.parent().click();
                 return check;
             }
@@ -81,8 +78,7 @@ public class ServiceSelenidePageObject {
     }
 
 
-
     public void clickDropDown() {
         dropdown.click();
     }
-  }
+}
