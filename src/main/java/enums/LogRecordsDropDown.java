@@ -2,7 +2,7 @@ package enums;
 
 public enum LogRecordsDropDown {
 
-    YELLOW ("Colors: value changed to Yellow");
+    YELLOW("Colors: value changed to Yellow");
 
     private String record;
 

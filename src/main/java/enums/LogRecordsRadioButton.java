@@ -2,7 +2,7 @@ package enums;
 
 public enum LogRecordsRadioButton {
 
-    SELEN ("metal: value changed to Selen");
+    SELEN("metal: value changed to Selen");
 
     private String record;
 
