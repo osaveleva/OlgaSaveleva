@@ -2,15 +2,15 @@ package hw4;
 
 import base.TestBaseSelenide;
 import com.codeborne.selenide.SelenideElement;
-import enums.SubMenuItems;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
+import enums.LogRecordsFromTo;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.DatesSelenidePageObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -30,6 +30,7 @@ public class DatesPageSelenide extends TestBaseSelenide {
 
     @Test
     public void checkServicePage() {
+       List<String> logList;
 
         //1. Assert Browser title
         assertEquals(getWebDriver().getTitle(), "Home Page");
@@ -46,23 +47,30 @@ public class DatesPageSelenide extends TestBaseSelenide {
         //5. Open through the header menu Service -> Different Elements Page
         datePage.clickMenuItem(datePage.subCollection, "Dates");
 
-        Actions act=new Actions(getWebDriver());
+        //6. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most rigth position
+        logList = datePage.makeListLog();
+        datePage.moveFromSlider(0);
+        datePage.moveToSlider(90);
+        datePage.From.shouldHave(exactText("0"));
+        datePage.To.shouldHave(exactText("90"));
 
-        act.click(datePage.From).build().perform();
-        //Thread.sleep(1000);
-        //for (int i = 0; i < 10; i++) {
-          //  act.sendKeys(Keys.ARROW_RIGHT).build().perform();
-            //Thread.sleep(200);
-        //}
-       // act.dragAndDropBy(datePage.From, 60, 0).build().perform();
-       // act.dragAndDrop(From, To).build().perform();
+        //7. Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        for (String e: logList){
+            $$(".panel-body-list > li").findBy(text(e)).should(exist);
+        }
 
-     //   $(".ui-slider-handle:nth-child(1)").dragAndDropTo("50");
-        String s = datePage.From.getText();
-        System.out.println(s);
+      //8. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most left position.
+        logList.clear();
+        logList = datePage.makeListLog();
+        datePage.moveFromSlider(0);
+        datePage.moveToSlider(0);
+        datePage.From.shouldHave(exactText("0"));
+        datePage.To.shouldHave(exactText("0"));
 
-        Integer result = Integer.valueOf(s);
-        System.out.println(result);
-
+       //7.Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        for (String e: logList){
+            $$(".panel-body-list > li").findBy(text(e)).should(exist);
+        }
+        logList.clear();
     }
 }
