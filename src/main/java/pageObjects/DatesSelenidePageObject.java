@@ -65,24 +65,27 @@ public class DatesSelenidePageObject {
         return null;
     }
 
-    public void moveSlider(int fromExpected, int toExpected, int px) {
+    public void moveSlider(int fromExpected, int toExpected, double px) {
         Actions act = new Actions(getWebDriver());
         int originalFrom = Integer.valueOf(from.getText());
         int originalTo = Integer.valueOf(to.getText());
         if (fromExpected > originalTo) {
-            act.dragAndDropBy(to, (toExpected - originalTo) * px, 0).build().perform();
-            act.dragAndDropBy(from, (fromExpected - originalFrom) * px, 0).build().perform();
+            act.dragAndDropBy(to, (int) Math.round((toExpected - originalTo) * px), 0).build().perform();
+            act.dragAndDropBy(from, (int) Math.round((fromExpected - originalFrom) * px), 0).build().perform();
         } else {
-            act.dragAndDropBy(from, (fromExpected - originalFrom) * px, 0).build().perform();
-            act.dragAndDropBy(to, (toExpected - originalTo) * px, 0).build().perform();
+            act.dragAndDropBy(from, (int) Math.round((fromExpected - originalFrom) * px), 0).build().perform();
+            act.dragAndDropBy(to, (int) Math.round ((toExpected - originalTo) * px), 0).build().perform();
         }
     }
 
     public List<String> makeListLog(int fromExpected, int toExpected) {
         List<String> logList = new ArrayList<String>();
+        logList.clear();
         logList.add(LogRecordsFromTo.FROM.getRecord() + fromExpected + LogRecordsFromTo.LINK.getRecord());
         logList.add(LogRecordsFromTo.TO.getRecord() + toExpected + LogRecordsFromTo.LINK.getRecord());
         return logList;
     }
+
 }
+
 

@@ -3,6 +3,7 @@ package hw4;
 import base.TestBaseSelenide;
 import com.codeborne.selenide.SelenideElement;
 import enums.LogRecordsFromTo;
+import org.bouncycastle.crypto.tls.MACAlgorithm;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.DatesSelenidePageObject;
@@ -47,24 +48,18 @@ public class DatesPageSelenide extends TestBaseSelenide {
         //5. Open through the header menu Service -> Different Elements Page
         datePage.clickMenuItem(datePage.subCollection, "Dates");
 
-        //System.out.println(datePage.From.getLocation());
-        // datePage.moveSlider(0,100);
-
-        //System.out.println(datePage.From.getLocation());
-
         //6. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most rigth position
         String offsetWidth = datePage.slider.getAttribute("offsetWidth");
-        int px = (int) Math.round(Double.valueOf(offsetWidth) / 100);
+        double step = Double.valueOf(offsetWidth) / 100;
+        double px = Math.round(step * 10.0) / 10.0;
         datePage.moveSlider(0, 100, px);
         datePage.from.shouldHave(exactText("0"));
         datePage.to.shouldHave(exactText("100"));
-        // datePage.makeListLog(0,100);
 
         //7. Assert that for "From" and "To" sliders there are logs rows with corresponding values
         for (String e : datePage.makeListLog(0, 100)) {
             $$(".panel-body-list > li").findBy(text(e)).should(exist);
         }
-        datePage.makeListLog(0, 100).clear();
 
         //8. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most left position.
         datePage.moveSlider(0, 0, px);
@@ -75,7 +70,6 @@ public class DatesPageSelenide extends TestBaseSelenide {
         for (String e : datePage.makeListLog(0, 0)) {
             $$(".panel-body-list > li").findBy(text(e)).should(exist);
         }
-        datePage.makeListLog(0, 0).clear();
 
         //10. Using drag-and-drop set Range sliders. left sliders - the most rigth position, right slider - the most rigth position.
         datePage.moveSlider(100, 100, px);
@@ -86,19 +80,17 @@ public class DatesPageSelenide extends TestBaseSelenide {
         for (String e : datePage.makeListLog(100, 100)) {
             $$(".panel-body-list > li").findBy(text(e)).should(exist);
         }
-        datePage.makeListLog(100, 100).clear();
 
         //12. Using drag-and-drop set Range sliders.
         datePage.moveSlider(30, 70, px);
-        datePage.from.shouldHave(exactText("26"));
-        datePage.to.shouldHave(exactText("69"));
-        datePage.makeListLog(26, 69);
+        datePage.from.shouldHave(exactText("30"));
+        datePage.to.shouldHave(exactText("70"));
+        datePage.makeListLog(30, 70);
         datePage.from.click();
 
         //13. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        for (String e : datePage.makeListLog(26, 69)) {
+        for (String e : datePage.makeListLog(30, 70)) {
             $$(".panel-body-list > li").findBy(text(e)).should(exist);
         }
-
     }
 }
