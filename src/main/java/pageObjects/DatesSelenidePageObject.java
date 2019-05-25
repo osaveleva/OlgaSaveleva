@@ -8,9 +8,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.forward;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
@@ -36,14 +39,17 @@ public class DatesSelenidePageObject {
     @FindBy(css = ".sub > li")
     public List<SelenideElement> subCollection;
 
-    @FindBy(css = ".ui-slider-handle:nth-child(1)")
-    public SelenideElement From;
-
-    @FindBy(css = ".ui-slider-handle:nth-child(3)")
-    public SelenideElement To;
-
     @FindBy(css = ".panel-body-list > li")
     public List<SelenideElement> logCollection;
+
+    @FindBy(css = ".ui-slider")
+    public SelenideElement slider;
+
+    @FindBy(css = ".ui-slider-handle:nth-child(1)")
+    public SelenideElement from;
+
+    @FindBy(css = ".ui-slider-handle:nth-child(3)")
+    public SelenideElement to;
 
     public void login(String name, String password) {
         profileButton.click();
@@ -62,11 +68,24 @@ public class DatesSelenidePageObject {
         return null;
     }
 
+    public void moveSlider(int fromExpected, int toExpected, int px) {
+        Actions act = new Actions(getWebDriver());
+        int originalFrom = Integer.valueOf(from.getText());
+        int originalTo = Integer.valueOf(to.getText());
+        if (fromExpected > originalTo) {
+            act.dragAndDropBy(to, (toExpected - originalTo) * px, 0).build().perform();
+            act.dragAndDropBy(from, (fromExpected - originalFrom) * px, 0).build().perform();
+        } else {
+            act.dragAndDropBy(from, (fromExpected - originalFrom) * px, 0).build().perform();
+            act.dragAndDropBy(to, (toExpected - originalTo) * px, 0).build().perform();
+        }
+    }
+
     public void moveFromSlider(int expect) {
 
-        int original = Integer.valueOf(From.getText());
+        int original = Integer.valueOf(from.getText());
         Actions act = new Actions(getWebDriver());
-        act.click(From).build().perform();
+        act.click(from).build().perform();
 
         if (expect - original > 0) {
             for (int i = 0; i < (expect - original); i++) {
@@ -78,13 +97,17 @@ public class DatesSelenidePageObject {
                 act.sendKeys(Keys.ARROW_LEFT).build().perform();
             }
         }
+        if (from.isEnabled()) {
+            from.click();
+        }
+
     }
 
     public void moveToSlider(int expect) {
-        int original = Integer.valueOf(To.getText());
+        int original = Integer.valueOf(to.getText());
 
         Actions act = new Actions(getWebDriver());
-        act.click(To).build().perform();
+        act.click(to).build().perform();
 
         if (original - expect > 0) {
             for (int i = 0; i < (original - expect); i++) {
@@ -98,11 +121,10 @@ public class DatesSelenidePageObject {
         }
     }
 
-
-    public List<String> makeListLog() {
+    public List<String> makeListLog(int fromExpected, int toExpected) {
         List<String> logList = new ArrayList<String>();
-        logList.add(LogRecordsFromTo.FROM.getRecord() + From.getText() + LogRecordsFromTo.LINK.getRecord());
-        logList.add(LogRecordsFromTo.TO.getRecord() + To.getText() + LogRecordsFromTo.LINK.getRecord());
+        logList.add(LogRecordsFromTo.FROM.getRecord() + fromExpected + LogRecordsFromTo.LINK.getRecord());
+        logList.add(LogRecordsFromTo.TO.getRecord() + toExpected + LogRecordsFromTo.LINK.getRecord());
         return logList;
     }
 }
