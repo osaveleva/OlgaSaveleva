@@ -39,9 +39,6 @@ public class DatesSelenidePageObject {
     @FindBy(css = ".sub > li")
     public List<SelenideElement> subCollection;
 
-    @FindBy(css = ".panel-body-list > li")
-    public List<SelenideElement> logCollection;
-
     @FindBy(css = ".ui-slider")
     public SelenideElement slider;
 
@@ -78,46 +75,6 @@ public class DatesSelenidePageObject {
         } else {
             act.dragAndDropBy(from, (fromExpected - originalFrom) * px, 0).build().perform();
             act.dragAndDropBy(to, (toExpected - originalTo) * px, 0).build().perform();
-        }
-    }
-
-    public void moveFromSlider(int expect) {
-
-        int original = Integer.valueOf(from.getText());
-        Actions act = new Actions(getWebDriver());
-        act.click(from).build().perform();
-
-        if (expect - original > 0) {
-            for (int i = 0; i < (expect - original); i++) {
-                act.sendKeys(Keys.ARROW_RIGHT).build().perform();
-            }
-        }
-        if (expect - original < 0) {
-            for (int i = 0; i < (original - expect); i++) {
-                act.sendKeys(Keys.ARROW_LEFT).build().perform();
-            }
-        }
-        if (from.isEnabled()) {
-            from.click();
-        }
-
-    }
-
-    public void moveToSlider(int expect) {
-        int original = Integer.valueOf(to.getText());
-
-        Actions act = new Actions(getWebDriver());
-        act.click(to).build().perform();
-
-        if (original - expect > 0) {
-            for (int i = 0; i < (original - expect); i++) {
-                act.sendKeys(Keys.ARROW_LEFT).build().perform();
-            }
-        }
-        if (original - expect < 0) {
-            for (int i = 0; i < (expect - original); i++) {
-                act.sendKeys(Keys.ARROW_RIGHT).build().perform();
-            }
         }
     }
 
