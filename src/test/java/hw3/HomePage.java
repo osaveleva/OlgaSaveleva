@@ -59,6 +59,11 @@ public class HomePage extends TestBase {
         //5. Assert browser title
         assertEquals(driver.getTitle(), "Home Page");
 
+        // TODO Why don't you create one single method for each steps 6,7,8 ?
+        // TODO Basically, it is not really great idea to work with PO elements directly.
+        //      This is possible is some cases, but in general we should create a methods, that allow us
+        //      to make low-level selenium calls, just keep it in your mind.
+
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
         assertEquals(homePageObject.getListSize(homePageObject.sidebarItems), 5);
 
