@@ -61,7 +61,7 @@ public class HomePageSoftAsserts {
         List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         softAssert.assertEquals(sidebarItems.size(), 5);
 
-        List<String> menuCollection = makeListCollection(driver.findElements(By.cssSelector(".sidebar-menu > li")));
+        List<String> menuCollection = makeListCollection(sidebarItems);
         for (String elementMenu : listMenu) {
             assertTrue(menuCollection.contains(elementMenu));
         }

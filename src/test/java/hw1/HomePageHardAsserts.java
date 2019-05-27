@@ -68,7 +68,7 @@ public class HomePageHardAsserts {
 
         // TODO Yes, this is almost okay, but imagine the situation if menuCollection would be empty.
         // What happened with your verification ?
-        List<String> menuCollection = makeListCollection(driver.findElements(By.cssSelector(".sidebar-menu > li")));
+        List<String> menuCollection = makeListCollection(sidebarItems);
         for (String elementMenu : listMenu) {
             assertTrue(menuCollection.contains(elementMenu));
         }
