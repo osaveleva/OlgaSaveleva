@@ -1,11 +1,15 @@
 package hw1;
 
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.impl.WebElementsCollection;
+import enums.LogRecordsFromTo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,11 +20,22 @@ import static org.testng.Assert.assertTrue;
 
 public class HomePageHardAsserts {
 
+    private List<String> makeListCollection(List<WebElement> collection) {
+        List<String> menuList = new ArrayList<>();
+        menuList.clear();
+        for (WebElement ele : collection) {
+            menuList.add(ele.getText());
+        }
+        return menuList;
+    }
+
+
     @Test
     public void checkHomePage() {
 
         List<String> listText = Arrays.asList("To include good practices\nand ideas from successful\nEPAM project", "To be flexible and\ncustomizable", "To be multiplatform", "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
         List<String> listMenu = Arrays.asList("Home", "Contact form", "Service", "Metals & Colors", "Elements packs");
+
 
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
@@ -53,10 +68,9 @@ public class HomePageHardAsserts {
 
         // TODO Yes, this is almost okay, but imagine the situation if menuCollection would be empty.
         // What happened with your verification ?
-        List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
-        for (WebElement elementMenu : menuCollection) {
-            assertTrue(elementMenu.isDisplayed());
-            assertTrue(listMenu.contains(elementMenu.getText()));
+        List<String> menuCollection = makeListCollection(driver.findElements(By.cssSelector(".sidebar-menu > li")));
+        for (String elementMenu : listMenu) {
+            assertTrue(menuCollection.contains(elementMenu));
         }
 
         //8. Assert that there are 4 images on the Index Page and they are displayed
@@ -80,10 +94,9 @@ public class HomePageHardAsserts {
         assertEquals(textItems.size(), 4);
 
         // TODO Same story like line 54
-        List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
-        for (WebElement elementText : textCollection) {
-            assertTrue(elementText.isDisplayed());
-            assertTrue(listText.contains(elementText.getText()));
+        List<String> textCollection = makeListCollection(driver.findElements(By.cssSelector("div.row > div .benefit-txt")));
+        for (String elementText : listText) {
+            assertTrue(textCollection.contains(elementText));
         }
 
         //10. Assert a text of the main headers

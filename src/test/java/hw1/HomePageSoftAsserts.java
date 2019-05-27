@@ -7,13 +7,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.setProperty;
+import static org.testng.Assert.assertTrue;
 
 
 public class HomePageSoftAsserts {
+
+    private List<String> makeListCollection(List<WebElement> collection) {
+        List<String> menuList = new ArrayList<>();
+        menuList.clear();
+        for (WebElement ele : collection) {
+            menuList.add(ele.getText());
+        }
+        return menuList;
+    }
 
     @Test
     public void checkHomePage() {
@@ -50,10 +61,9 @@ public class HomePageSoftAsserts {
         List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         softAssert.assertEquals(sidebarItems.size(), 5);
 
-        List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
-        for (WebElement elementMenu : menuCollection) {
-            softAssert.assertTrue(elementMenu.isDisplayed());
-            softAssert.assertTrue(listMenu.contains(elementMenu.getText()));
+        List<String> menuCollection = makeListCollection(driver.findElements(By.cssSelector(".sidebar-menu > li")));
+        for (String elementMenu : listMenu) {
+            assertTrue(menuCollection.contains(elementMenu));
         }
 
         //8. Assert that there are 4 images on the Index Page and they are displayed
@@ -76,10 +86,9 @@ public class HomePageSoftAsserts {
         List<WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         softAssert.assertEquals(textItems.size(), 4);
 
-        List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
-        for (WebElement elementText : textCollection) {
-            softAssert.assertTrue(elementText.isDisplayed());
-            softAssert.assertTrue(listText.contains(elementText.getText()));
+        List<String> textCollection = makeListCollection(driver.findElements(By.cssSelector("div.row > div .benefit-txt")));
+        for (String elementText : listText) {
+            assertTrue(textCollection.contains(elementText));
         }
 
         //10. Assert a text of the main headers
