@@ -51,6 +51,8 @@ public class HomePageHardAsserts {
         List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         assertEquals(sidebarItems.size(), 5);
 
+        // TODO Yes, this is almost okay, but imagine the situation if menuCollection would be empty.
+        // What happened with your verification ?
         List<WebElement> menuCollection = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         for (WebElement elementMenu : menuCollection) {
             assertTrue(elementMenu.isDisplayed());
@@ -77,6 +79,7 @@ public class HomePageHardAsserts {
         List<WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(textItems.size(), 4);
 
+        // TODO Same story like line 54
         List<WebElement> textCollection = driver.findElements(By.cssSelector("div.row > div .benefit-txt"));
         for (WebElement elementText : textCollection) {
             assertTrue(elementText.isDisplayed());
