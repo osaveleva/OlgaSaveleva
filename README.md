@@ -23,3 +23,13 @@ testngTestAnnotation.xml for test for exercise 3
 3. gitignore file was created and commit to git. IDEA specific files were added to the file.
 4. HW2: files were updated based on HW1 changes.
 5. HW3: files were updated based on HW1 changes. To find items in left-hand menu xpath search by text was used. For text under 4 images css and for loop were used.
+
+
+**HW1 updates 27.05.2019**
+Loops for searching items in left-hand section and for text under 4 images were updated
+
+
+**HW3 updates for 28.05.2019**
+1. One method was created for each step 6,7,8
+2. Instead of working with PO elements directly methods are used
+3. Config.properties file and enums were added to remove all hardcoded values in test
