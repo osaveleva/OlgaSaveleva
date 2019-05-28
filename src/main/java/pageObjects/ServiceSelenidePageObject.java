@@ -2,16 +2,13 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.impl.WebElementsCollection;
+import enums.LogRecordsCheckBox;
 import enums.SubMenuItems;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$;
 
 
@@ -58,18 +55,23 @@ public class ServiceSelenidePageObject {
     @FindBy(css = ".label-checkbox input[type ='checkbox']")
     public List<SelenideElement> checkboxValueCollection;
 
-    @FindBy(css = ".label-radio input[type ='radio']")
-    public List<SelenideElement> radioButtonValueCollection;
+    @FindBy(css = ".label-checkbox")
+    private ElementsCollection checkboxRow;
 
-    @FindBy(css = "div[name='log-sidebar']]")
+    @FindBy(css = ".label-radio input[type ='radio']")
+    private List<SelenideElement> radioButtonValueCollection;
+
+    @FindBy(css = "div[name='log-sidebar']")
     private SelenideElement rightSection;
 
     @FindBy(css = "div[name='navigation-sidebar']")
     private SelenideElement leftSection;
 
+    @FindBy(css = ".panel-body-list.logs > li")
+    private ElementsCollection checkboxLogRecords;
 
-
-
+    @FindBy(css = ".panel-body-list.logs > li")
+    private ElementsCollection radioLogRecords;
 
 
     public void login(String name, String password) {
@@ -99,15 +101,23 @@ public class ServiceSelenidePageObject {
 
     }
 
-    public SelenideElement checkCheckBox(List<SelenideElement> checkCollection, String checkboxValue) {
+    private SelenideElement checkItem(List<SelenideElement> checkCollection, String checkboxValue) {
         for (SelenideElement check : checkCollection) {
             if (check.parent().getText().equals(checkboxValue)) {
                 check.parent().click();
+                check.shouldBe(checked);
                 return check;
             }
         }
         return null;
     }
+
+
+    public void checkCheckBoxRadioButtonStatus(String itemValue) {
+        checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
+        checkboxRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
+    }
+
 
     public void checkUserNameTitle(String configValue) {
         userName.shouldHave(text(configValue));
@@ -120,31 +130,56 @@ public class ServiceSelenidePageObject {
         }
     }
 
-    public void clickDropDown() {
+    public void clickDropDown(String value) {
         dropdown.click();
+        checkItem(radioButtonValueCollection, value).shouldBe(checked);
+
+
     }
 
     public void checkCheckBoxCollectionSize(int configValue) {
         checkboxCollection.shouldHaveSize(configValue);
     }
 
-    public void checkRadioButtonCollectionSize(String configValue) {
-        radioButtonCollection.shouldHaveSize(Integer.valueOf(configValue));
+    public void checkRadioButtonCollectionSize(int configValue) {
+        radioButtonCollection.shouldHaveSize(configValue);
     }
 
     public void checkDropDownCollectionSize(String configValue) {
         dropdownCollection.shouldHaveSize(Integer.valueOf(configValue));
     }
 
-    public void checkButtonCollectionSize(String configValue) {
-        buttonCollection.shouldHaveSize(Integer.valueOf(configValue));
+    public void checkButtonCollectionSize(int configValue) {
+        buttonCollection.shouldHaveSize(configValue);
     }
 
-    public void checkRightSectionVisibility(){
+    public void checkRightSectionVisibility() {
         rightSection.shouldBe(visible);
     }
 
-    public void checkLeftSectionVisibility(){
+    public void checkLeftSectionVisibility() {
         leftSection.shouldBe(visible);
+    }
+
+
+    public void checkRadioButtonStatus(String value) {
+        checkItem(radioButtonValueCollection, value).shouldBe(checked);
+    }
+
+    public void checkCheckBoxLogRecords() {
+        checkboxLogRecords.findBy(text(LogRecordsCheckBox.WINDSELECTED.getRecord())).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsCheckBox.WATERSELECTED.getRecord())).shouldBe(visible);
+
+
+      // for (LogRecordsCheckBox lg : LogRecordsCheckBox.values()) {
+
+      //     //checkboxLogRecords.findBy(text(lg.getRecord())).shouldBe(visible);
+      // }
+    }
+
+    public void checkRadioButtonLogRecords() {
+        for (LogRecordsCheckBox lg : LogRecordsCheckBox.values()) {
+            radioLogRecords.findBy(text(lg.getRecord())).shouldBe(visible);
+        }
     }
 }

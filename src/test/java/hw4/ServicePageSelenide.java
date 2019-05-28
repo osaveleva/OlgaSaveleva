@@ -42,42 +42,37 @@ public class ServicePageSelenide extends TestBaseSelenide {
         //5. Open through the header menu Service -> Different Elements Page
         servicePage.clickDiffElementMenuItem(SubMenuItems.DIFFELEMENTS.getRecord());
 
-    //   //6. Check interface on Different elements page, it contains all needed elements
-    //   servicePage.checkCheckBoxCollectionSize(CheckBoxItems.values().length);
-    //   servicePage.checkRadioButtonCollectionSize(PropertyManager.getInstance().getRadioButtonCollectionSize());
-    //   servicePage.checkDropDownCollectionSize(PropertyManager.getInstance().getDropdownCollectionSize());
-    //   servicePage.checkRadioButtonCollectionSize(PropertyManager.getInstance().getButtonsCollectionSize());
+        //6. Check interface on Different elements page, it contains all needed elements
+        servicePage.checkCheckBoxCollectionSize(CheckBoxItems.values().length);
+        servicePage.checkRadioButtonCollectionSize(RadioButtonItems.values().length);
+        servicePage.checkDropDownCollectionSize(PropertyManager.getInstance().getDropdownCollectionSize());
+        servicePage.checkButtonCollectionSize(DiffElementButtons.values().length);
 
-    //   //7. Assert that there is Right Section
-    //   servicePage.checkRightSectionVisibility();
+        //7. Assert that there is Right Section
 
-    //   //8. Assert that there is Left Section
-    //   servicePage.checkLeftSectionVisibility();
-
-    //   //9. Select checkboxes
-    //   servicePage.checkCheckBox(servicePage.checkboxValueCollection, "Wind").shouldBe(checked);
-    //   servicePage.checkCheckBox(servicePage.checkboxValueCollection, "Water").shouldBe(checked);
-
+        servicePage.checkRightSectionVisibility();
+        //8. Assert that there is Left Section
+        servicePage.checkLeftSectionVisibility();
+        //9. Select checkboxes
+        servicePage.checkCheckBoxRadioButtonStatus(CheckBoxItems.WIND.getRecord());
+        servicePage.checkCheckBoxRadioButtonStatus(CheckBoxItems.WATER.getRecord());
+        //servicePage.checkCheckBoxStatus(CheckBoxItems.WIND.getRecord());
+    //   servicePage.checkCheckBoxStatus(CheckBoxItems.WATER.getRecord());
     //   //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-    //   for (LogRecordsCheckBox lg : LogRecordsCheckBox.values()) {
-    //       $$(".panel-body-list.logs > li").findBy(text(lg.getRecord())).shouldBe(visible);
-    //   }
-
+         servicePage.checkCheckBoxLogRecords();
     //   //11. Select radio
-    //   servicePage.checkCheckBox(servicePage.radioButtonValueCollection, "Selen").should(exist);
-
+    //   servicePage.checkRadioButtonStatus(RadioButtonItems.SELEN.getRecord());
     //   //12. Assert that for radiobutton there is a log row and value is corresponded to the status of radiobutton.
-    //   for (LogRecordsRadioButton rb : LogRecordsRadioButton.values()) {
-    //       $$(".panel-body-list.logs > li").findBy(text(rb.getRecord())).should(exist);
-    //   }
+    //   servicePage.checkRadioButtonLogRecords();
 
-    //   //13. Select in dropdown
-    //   servicePage.clickDropDown();
-    //   //servicePage.clickMenuItem(servicePage.dropdonwItemCollection, "Yellow").shouldBe(selected);
 
-    //   //14. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-    //   for (LogRecordsDropDown dd : LogRecordsDropDown.values()) {
-    //       $$(".panel-body-list.logs > li").findBy(text(dd.getRecord())).should(exist);
-    //   }
+
+        //13. Select in dropdown
+//servicePage.clickDropDown();
+//servicePage.clickMenuItem(servicePage.dropdonwItemCollection, "Yellow").shouldBe(selected);
+   //14. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
+//for (LogRecordsDropDown dd : LogRecordsDropDown.values()) {
+//$$(".panel-body-list.logs > li").findBy(text(dd.getRecord())).should(exist);
+//}
     }
 }

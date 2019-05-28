@@ -15,15 +15,8 @@ public class PropertyManager {
     private static String logo;
     private static String href;
     private static String subheader;
-    private static String leftSidemenuSize;
-    private static String subTextSize;
     private static String iconSize;
-    private static String menuService;
-    private static String menuDiffElements;
-    private static String checkBoxCollectionSize;
-    private static String radioButtonCollectionSize;
     private static String dropdownCollectionSize;
-    private static String buttonsCollectionSize;
 
 
     public static PropertyManager getInstance() {
@@ -54,13 +47,9 @@ public class PropertyManager {
         logo = prop.getProperty("logo");
         href = prop.getProperty("href");
         subheader = prop.getProperty("subheader");
-        leftSidemenuSize = prop.getProperty("leftSidemenuSize");
-        subTextSize = prop.getProperty("subTextSize");
         iconSize = prop.getProperty("iconSize");
-        checkBoxCollectionSize = prop.getProperty("checkBoxCollectionSize");
-        radioButtonCollectionSize = prop.getProperty("radioButtonCollectionSize");
         dropdownCollectionSize = prop.getProperty("dropdownCollectionSize");
-        buttonsCollectionSize = prop.getProperty("buttonsCollectionSize");
+
     }
 
     public String getURL() {
@@ -95,32 +84,12 @@ public class PropertyManager {
         return subheader;
     }
 
-    public String getLeftSidemenuSize() {
-        return leftSidemenuSize;
-    }
-
-    public String getSubTextSize() {
-        return subTextSize;
-    }
-
     public String getIconSize() {
         return iconSize;
     }
 
-    public String getCheckBoxCollectionSize() {
-        return checkBoxCollectionSize;
-    }
-
-    public String getRadioButtonCollectionSize() {
-        return radioButtonCollectionSize;
-    }
-
     public String getDropdownCollectionSize() {
         return dropdownCollectionSize;
-    }
-
-    public String getButtonsCollectionSize() {
-        return buttonsCollectionSize;
     }
 
 }
