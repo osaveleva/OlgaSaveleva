@@ -1,9 +1,7 @@
 package hw3;
 
 import base.TestBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
@@ -11,10 +9,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.HomePageObject;
+import utilities.PropertyManager;
 
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -42,22 +38,21 @@ public class HomePage extends TestBase {
 
     @Test
     public void checkHomePage() {
-        List<String> listText = Arrays.asList("To include good practices\nand ideas from successful\nEPAM project", "To be flexible and\ncustomizable", "To be multiplatform", "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
 
         //1. Open test site by URL
-        driver.navigate().to("https://epam.github.io/JDI/");
+        driver.navigate().to(PropertyManager.getInstance().getURL());
 
         //2. Assert browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), PropertyManager.getInstance().getMainDriverTitle());
 
         //3. Perform login
-        homePageObject.login("epam", "1234");
+        homePageObject.login(PropertyManager.getInstance().getLogin(), PropertyManager.getInstance().getPassword());
 
         //4. Assert User name in the left-top side of screen that user is loggined;
-        assertEquals(homePageObject.geTitle(), "PITER CHAILOVSKII");
+        assertEquals(homePageObject.geTitle(), PropertyManager.getInstance().getPageTitle());
 
         //5. Assert browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), PropertyManager.getInstance().getMainDriverTitle());
 
         // TODO Why don't you create one single method for each steps 6,7,8 ?
         // TODO Basically, it is not really great idea to work with PO elements directly.
@@ -65,56 +60,40 @@ public class HomePage extends TestBase {
         //      to make low-level selenium calls, just keep it in your mind.
 
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        assertEquals(homePageObject.getListSize(homePageObject.sidebarItems), 5);
-
-        assertTrue(homePageObject.itemService.isDisplayed());
-        assertTrue(homePageObject.itemHome.isDisplayed());
-        assertTrue(homePageObject.itemContactForm.isDisplayed());
-        assertTrue(homePageObject.itemMetalsColors.isDisplayed());
-        assertTrue(homePageObject.itemElementsPacks.isDisplayed());
+        assertTrue(homePageObject.checkLeftMenuProperty(PropertyManager.getInstance().getLeftSidemenuSize()));
 
         //7. Assert that there are 4 images on the Index Page and they are displayed
-        assertEquals(homePageObject.getListSize(homePageObject.icons), 4);
-
-        assertTrue(homePageObject.iconPractise.isDisplayed());
-        assertTrue(homePageObject.iconMulti.isDisplayed());
-        assertTrue(homePageObject.iconCustom.isDisplayed());
-        assertTrue(homePageObject.iconBase.isDisplayed());
+        assertTrue(homePageObject.checkIconProperty(PropertyManager.getInstance().getIconSize()));
 
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        assertEquals(homePageObject.getListSize(homePageObject.textItems), 4);
-
-        for (WebElement elementText : homePageObject.textCollection) {
-            assertTrue(elementText.isDisplayed());
-            assertTrue(listText.contains(elementText.getText()));
-        }
+        assertTrue(homePageObject.checkSubTextProperty(PropertyManager.getInstance().getSubTextSize()));
 
         //9. Assert a text of the main headers
-        assertTrue(homePageObject.textHeader.isDisplayed());
-        assertTrue(homePageObject.mainHeader.isDisplayed());
+        assertTrue(homePageObject.checkTextHeaderTitleVisiblity());
+        assertTrue(homePageObject.checkMainHeaderTitleVisibility());
 
         //10. Assert that there is the iframe in the center of page
-        assertTrue(homePageObject.iframe.isDisplayed());
+        assertTrue(homePageObject.checkIframeVisibility());
 
         //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         String mainWindowHandle = driver.getWindowHandle();
         driver.switchTo().frame(homePageObject.iframe);
-        assertEquals(homePageObject.logo.getAttribute("src"), "https://epam.github.io/JDI/images/Logo_Epam_Color.svg");
+        assertTrue(homePageObject.checkLogoValue(PropertyManager.getInstance().getLogo()));
 
         //12. Switch to original window back
         driver.switchTo().window(mainWindowHandle);
 
         //13. Assert a text of the sub header
-        assertEquals(homePageObject.subheader.getText(), "JDI GITHUB");
+        assertTrue(homePageObject.checkSubHeaderText(PropertyManager.getInstance().getSubHeader()));
 
         //14. Assert that JDI GITHUB is a link and has a proper URL
-        assertEquals(homePageObject.subheader.getAttribute("href"), "https://github.com/epam/JDI");
+        assertTrue(homePageObject.checkSubHeaderLink(PropertyManager.getInstance().getHref()));
 
         //15. Assert that there is Left Section
-        assertTrue(homePageObject.leftSection.isDisplayed());
+        assertTrue(homePageObject.checkLeftSectionVisibility());
 
         //16. Assert that there is Footer
-        assertTrue(homePageObject.footer.isDisplayed());
+        assertTrue(homePageObject.checkFooterVisibility());
 
     }
 }

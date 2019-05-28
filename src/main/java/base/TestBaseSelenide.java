@@ -1,10 +1,10 @@
 package base;
 
 import com.codeborne.selenide.Configuration;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pageObjects.ServiceSelenidePageObject;
 
-import static com.codeborne.selenide.Selenide.page;
 import static java.lang.System.setProperty;
 
 
@@ -16,5 +16,9 @@ public class TestBaseSelenide {
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
     }
 
+    @AfterSuite
+    public void afterSuite() {
+
+    }
 
 }

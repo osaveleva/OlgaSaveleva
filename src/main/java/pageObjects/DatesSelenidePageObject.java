@@ -1,5 +1,6 @@
 package pageObjects;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import enums.LogRecordsFromTo;
@@ -34,7 +35,7 @@ public class DatesSelenidePageObject {
     public SelenideElement userName;
 
     @FindBy(css = ".sidebar-menu > li")
-    public List<SelenideElement> menuCollection;
+    public ElementsCollection menuCollection;
 
     @FindBy(css = ".sub > li")
     public List<SelenideElement> subCollection;
@@ -79,7 +80,7 @@ public class DatesSelenidePageObject {
     }
 
     public List<String> makeListLog(int fromExpected, int toExpected) {
-        List<String> logList = new ArrayList<String>();
+        List<String> logList = new ArrayList<>();
         logList.clear();
         logList.add(LogRecordsFromTo.FROM.getRecord() + fromExpected + LogRecordsFromTo.LINK.getRecord());
         logList.add(LogRecordsFromTo.TO.getRecord() + toExpected + LogRecordsFromTo.LINK.getRecord());

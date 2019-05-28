@@ -1,9 +1,15 @@
 package pageObjects;
 
+import enums.LeftMenuItems;
+import enums.SubTextValues;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class HomePageObject {
 
@@ -23,7 +29,7 @@ public class HomePageObject {
     private WebElement userName;
 
     @FindBy(css = ".sidebar-menu > li")
-    public List<WebElement> sidebarItems;
+    private List<WebElement> sidebarItems;
 
     @FindBy(css = ".icons-benefit")
     public List<WebElement> icons;
@@ -31,41 +37,14 @@ public class HomePageObject {
     @FindBy(css = ".benefit-txt")
     public List<WebElement> textItems;
 
-    @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Service']")
-    public WebElement itemService;
-
-    @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Contact form']")
-    public WebElement itemContactForm;
-
-    @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Home']")
-    public WebElement itemHome;
-
-    @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Metals & Colors']")
-    public WebElement itemMetalsColors;
-
-    @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Elements packs']")
-    public WebElement itemElementsPacks;
-
-    @FindBy(css = ".icons-benefit.icon-practise")
-    public WebElement iconPractise;
-
-    @FindBy(css = ".icons-benefit.icon-multi")
-    public WebElement iconMulti;
-
-    @FindBy(css = ".icons-benefit.icon-custom")
-    public WebElement iconCustom;
-
-    @FindBy(css = ".icons-benefit.icon-base")
-    public WebElement iconBase;
-
     @FindBy(css = "div.row > div .benefit-txt")
-    public List<WebElement> textCollection;
+    private List<WebElement> textCollection;
 
     @FindBy(css = "h3.main-title.text-center")
-    public WebElement mainHeader;
+    private WebElement mainHeader;
 
     @FindBy(css = "p.main-txt")
-    public WebElement textHeader;
+    private WebElement textHeader;
 
     @FindBy(css = "iframe#iframe")
     public WebElement iframe;
@@ -77,7 +56,7 @@ public class HomePageObject {
     public WebElement subheader;
 
     @FindBy(css = "#mCSB_1")
-    public WebElement leftSection;
+    private WebElement leftSection;
 
     @FindBy(css = ".footer-content")
     public WebElement footer;
@@ -87,13 +66,95 @@ public class HomePageObject {
         nameField.sendKeys(name);
         passwordField.sendKeys(password);
         loginButton.click();
+
     }
 
     public String geTitle() {
         return userName.getText();
     }
 
-    public int getListSize(List<WebElement> list) {
-        return list.size();
+
+    private List<String> makeListCollection(List<WebElement> collection) {
+        List<String> menuList = new ArrayList<>();
+        menuList.clear();
+        for (WebElement ele : collection) {
+            menuList.add(ele.getText());
+        }
+        return menuList;
     }
+
+    public boolean checkLeftMenuProperty(String configValue) {
+        int size = Integer.valueOf(configValue);
+        assertEquals(sidebarItems.size(), size);
+        for (LeftMenuItems st : LeftMenuItems.values()) {
+            assertTrue(makeListCollection(sidebarItems).contains(st.getRecord()));
+        }
+        for (WebElement ele : sidebarItems) {
+            assertTrue(ele.isDisplayed());
+        }
+        return true;
+    }
+
+    public boolean checkSubTextProperty(String configValue) {
+        int size = Integer.valueOf(configValue);
+        assertEquals(textCollection.size(), size);
+        for (SubTextValues st : SubTextValues.values()) {
+            assertTrue(makeListCollection(textCollection).contains(st.getRecord()));
+        }
+        for (WebElement ele : textCollection) {
+            assertTrue(ele.isDisplayed());
+        }
+        return true;
+    }
+
+    public boolean checkIconProperty(String configValue) {
+        int size = Integer.valueOf(configValue);
+        assertEquals(icons.size(), size);
+        for (WebElement ele : icons) {
+            assertTrue(ele.isDisplayed());
+        }
+        return true;
+    }
+
+    public boolean checkTextHeaderTitleVisiblity() {
+        assertTrue(textHeader.isDisplayed());
+        return true;
+    }
+
+    public boolean checkMainHeaderTitleVisibility() {
+        assertTrue(mainHeader.isDisplayed());
+        return true;
+    }
+
+    public boolean checkIframeVisibility() {
+        assertTrue(iframe.isDisplayed());
+        return true;
+    }
+
+    public boolean checkLeftSectionVisibility() {
+        assertTrue(leftSection.isDisplayed());
+        return true;
+    }
+
+    public boolean checkFooterVisibility() {
+        assertTrue(footer.isDisplayed());
+        return true;
+    }
+
+    public boolean checkLogoValue(String configValue) {
+        assertEquals(logo.getAttribute("src"), configValue);
+        return true;
+    }
+
+    public boolean checkSubHeaderText(String configValue) {
+        assertEquals(subheader.getText(), configValue);
+        return true;
+    }
+
+    public boolean checkSubHeaderLink(String configValue) {
+        assertEquals(subheader.getAttribute("href"), configValue);
+        return true;
+    }
+
 }
+

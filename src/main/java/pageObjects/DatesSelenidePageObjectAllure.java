@@ -51,7 +51,7 @@ public class DatesSelenidePageObjectAllure {
         loginButton.click();
     }
 
-
+    @Step
     public SelenideElement clickMenuItem(List<SelenideElement> collection, String str) {
         for (SelenideElement ele : collection) {
             if (ele.getText().equals(str)) {
@@ -62,7 +62,7 @@ public class DatesSelenidePageObjectAllure {
         return null;
     }
 
-
+    @Step
     public void moveSlider(int fromExpected, int toExpected, double px) {
         Actions act = new Actions(getWebDriver());
         int originalFrom = Integer.valueOf(from.getText());
@@ -76,6 +76,7 @@ public class DatesSelenidePageObjectAllure {
         }
     }
 
+    @Step
     public List<String> makeListLog(int fromExpected, int toExpected) {
         List<String> logList = new ArrayList<>();
         logList.clear();

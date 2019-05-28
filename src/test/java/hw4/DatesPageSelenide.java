@@ -56,6 +56,7 @@ public class DatesPageSelenide extends TestBaseSelenide {
         datePage.from.shouldHave(exactText("0"));
         datePage.to.shouldHave(exactText("100"));
 
+
         //7. Assert that for "From" and "To" sliders there are logs rows with corresponding values
         for (String e : datePage.makeListLog(0, 100)) {
             $$(".panel-body-list > li").findBy(text(e)).should(exist);
