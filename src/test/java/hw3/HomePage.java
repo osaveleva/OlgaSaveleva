@@ -1,6 +1,8 @@
 package hw3;
 
 import base.TestBase;
+import enums.LeftMenuItems;
+import enums.SubTextValues;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -60,13 +62,13 @@ public class HomePage extends TestBase {
         //      to make low-level selenium calls, just keep it in your mind.
 
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        assertTrue(homePageObject.checkLeftMenuProperty(PropertyManager.getInstance().getLeftSidemenuSize()));
+        assertTrue(homePageObject.checkLeftMenuProperty(LeftMenuItems.values().length));
 
         //7. Assert that there are 4 images on the Index Page and they are displayed
         assertTrue(homePageObject.checkIconProperty(PropertyManager.getInstance().getIconSize()));
 
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        assertTrue(homePageObject.checkSubTextProperty(PropertyManager.getInstance().getSubTextSize()));
+        assertTrue(homePageObject.checkSubTextProperty(SubTextValues.values().length));
 
         //9. Assert a text of the main headers
         assertTrue(homePageObject.checkTextHeaderTitleVisiblity());

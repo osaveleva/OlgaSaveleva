@@ -83,9 +83,8 @@ public class HomePageObject {
         return menuList;
     }
 
-    public boolean checkLeftMenuProperty(String configValue) {
-        int size = Integer.valueOf(configValue);
-        assertEquals(sidebarItems.size(), size);
+    public boolean checkLeftMenuProperty(int configValue) {
+        assertEquals(sidebarItems.size(), configValue);
         for (LeftMenuItems st : LeftMenuItems.values()) {
             assertTrue(makeListCollection(sidebarItems).contains(st.getRecord()));
         }
@@ -95,9 +94,8 @@ public class HomePageObject {
         return true;
     }
 
-    public boolean checkSubTextProperty(String configValue) {
-        int size = Integer.valueOf(configValue);
-        assertEquals(textCollection.size(), size);
+    public boolean checkSubTextProperty(int configValue) {
+        assertEquals(textCollection.size(), configValue);
         for (SubTextValues st : SubTextValues.values()) {
             assertTrue(makeListCollection(textCollection).contains(st.getRecord()));
         }
