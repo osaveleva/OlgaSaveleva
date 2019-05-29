@@ -2,6 +2,7 @@ package hw3;
 
 import base.TestBase;
 import enums.SubTextValues;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -10,21 +11,24 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.HomePageObject;
-import utilities.PropertyManager;
+import utilities.Configuration;
 
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class HomePage extends TestBase {
+public class HomePage extends TestBase{
 
     private WebDriver driver;
     private HomePageObject homePageObject;
+    private Configuration cfg;
 
     @BeforeClass
     public void beforeClass() {
         driver = new ChromeDriver();
         homePageObject = PageFactory.initElements(driver, HomePageObject.class);
+        cfg = ConfigFactory.create(Configuration.class);
+
     }
 
     @BeforeMethod
@@ -40,56 +44,57 @@ public class HomePage extends TestBase {
     @Test
     public void checkHomePage() {
 
+
         //1. Open test site by URL
-        driver.navigate().to(PropertyManager.getInstance().getURL());
+        driver.navigate().to(cfg.url());
 
-        //2. Assert browser title
-        assertEquals(driver.getTitle(), PropertyManager.getInstance().getMainDriverTitle());
+       //2. Assert browser title
+       assertEquals(driver.getTitle(), cfg.mainDriverTitle());
 
-        //3. Perform login
-        homePageObject.login(PropertyManager.getInstance().getLogin(), PropertyManager.getInstance().getPassword());
+      //3. Perform login
+       homePageObject.login(cfg.login(), cfg.password());
 
-        //4. Assert User name in the left-top side of screen that user is loggined;
-        assertEquals(homePageObject.geTitle(), PropertyManager.getInstance().getPageTitle());
+      //4. Assert User name in the left-top side of screen that user is loggined;
+       assertEquals(homePageObject.geTitle(), cfg.pageTitle());
 
-        //5. Assert browser title
-        assertEquals(driver.getTitle(), PropertyManager.getInstance().getMainDriverTitle());
+      //5. Assert browser title
+       assertEquals(driver.getTitle(), cfg.mainDriverTitle());
 
-        //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        // TODO
-        homePageObject.checkLeftMenu();
+      //6. Assert that there are 4 items on the header section are displayed and they have proper texts
+       // TODO
+       homePageObject.checkLeftMenu();
 
-        //7. Assert that there are 4 images on the Index Page and they are displayed
-        assertTrue(homePageObject.checkBenefits(PropertyManager.getInstance().getIconSize()));
+      //7. Assert that there are 4 images on the Index Page and they are displayed
+       homePageObject.checkBenefits(cfg.iconSize());
 
-        //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        assertTrue(homePageObject.checkSubTextProperty(SubTextValues.values().length));
+      //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
+       homePageObject.checkSubText(SubTextValues.values().length);
 
-        //9. Assert a text of the main headers
-        assertTrue(homePageObject.checkTextHeaderTitleVisiblity());
-        assertTrue(homePageObject.checkMainHeaderTitleVisibility());
+      //9. Assert a text of the main headers
+       homePageObject.checkTextHeaderTitleVisiblity();
+       homePageObject.checkMainHeaderTitle();
 
-        //10. Assert that there is the iframe in the center of page
-        assertTrue(homePageObject.checkIframeVisibility());
+      //10. Assert that there is the iframe in the center of page
+       homePageObject.checkIframe();
 
-        //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-        String mainWindowHandle = driver.getWindowHandle();
-        driver.switchTo().frame(homePageObject.iframe);
-        assertTrue(homePageObject.checkLogoValue(PropertyManager.getInstance().getLogo()));
+      //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
+       String mainWindowHandle = driver.getWindowHandle();
+       driver.switchTo().frame(homePageObject.iframe);
+       homePageObject.checkLogo(cfg.logo());
 
-        //12. Switch to original window back
-        driver.switchTo().window(mainWindowHandle);
+      //12. Switch to original window back
+       driver.switchTo().window(mainWindowHandle);
 
-        //13. Assert a text of the sub header
-        assertTrue(homePageObject.checkSubHeaderText(PropertyManager.getInstance().getSubHeader()));
+      //13. Assert a text of the sub header
+       homePageObject.checkSubHeader(cfg.subheader());
 
-        //14. Assert that JDI GITHUB is a link and has a proper URL
-        assertTrue(homePageObject.checkSubHeaderLink(PropertyManager.getInstance().getHref()));
+      //14. Assert that JDI GITHUB is a link and has a proper URL
+       homePageObject.checkSubHeaderLink(cfg.href());
 
-        //15. Assert that there is Left Section
-        assertTrue(homePageObject.checkLeftSectionVisibility());
+      //15. Assert that there is Left Section
+       homePageObject.checkLeftSection();
 
-        //16. Assert that there is Footer
-        assertTrue(homePageObject.checkFooterVisibility());
+      //16. Assert that there is Footer
+       homePageObject.checkFooter();
     }
 }

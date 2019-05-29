@@ -92,7 +92,7 @@ public class HomePageObject {
         }
     }
 
-    public boolean checkSubTextProperty(int configValue) {
+    public void checkSubText(int configValue) {
         assertEquals(textCollection.size(), configValue);
         for (SubTextValues st : SubTextValues.values()) {
             assertTrue(makeListCollection(textCollection).contains(st.getRecord()));
@@ -100,56 +100,46 @@ public class HomePageObject {
         for (WebElement ele : textCollection) {
             assertTrue(ele.isDisplayed());
         }
-        return true;
     }
 
-    public boolean checkBenefits(String configValue) {
+    public void checkBenefits(String configValue) {
         int size = Integer.valueOf(configValue);
         assertEquals(icons.size(), size);
         for (WebElement ele : icons) {
             assertTrue(ele.isDisplayed());
         }
-        return true;
     }
 
-    public boolean checkTextHeaderTitleVisiblity() {
+    public void checkTextHeaderTitleVisiblity() {
         assertTrue(textHeader.isDisplayed());
-        return true;
     }
 
-    public boolean checkMainHeaderTitleVisibility() {
+    public void checkMainHeaderTitle() {
         assertTrue(mainHeader.isDisplayed());
-        return true;
     }
 
-    public boolean checkIframeVisibility() {
+    public void checkIframe() {
         assertTrue(iframe.isDisplayed());
-        return true;
     }
 
-    public boolean checkLeftSectionVisibility() {
+    public void checkLeftSection() {
         assertTrue(leftSection.isDisplayed());
-        return true;
     }
 
-    public boolean checkFooterVisibility() {
+    public void checkFooter() {
         assertTrue(footer.isDisplayed());
-        return true;
     }
 
-    public boolean checkLogoValue(String configValue) {
+    public void checkLogo(String configValue) {
         assertEquals(logo.getAttribute("src"), configValue);
-        return true;
     }
 
-    public boolean checkSubHeaderText(String configValue) {
+    public void checkSubHeader(String configValue) {
         assertEquals(subheader.getText(), configValue);
-        return true;
     }
 
-    public boolean checkSubHeaderLink(String configValue) {
+    public void checkSubHeaderLink(String configValue) {
         assertEquals(subheader.getAttribute("href"), configValue);
-        return true;
     }
 
 }

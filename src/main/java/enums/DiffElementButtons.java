@@ -3,7 +3,7 @@ package enums;
 
 public enum DiffElementButtons {
 
-    BUTTONDEFAULT("DEFAULT BUTTON"),
+    BUTTON_DEFAULT("DEFAULT BUTTON"),
     BUTTON("BUTTON");
 
     private String record;

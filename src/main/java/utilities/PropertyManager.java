@@ -8,7 +8,7 @@ import java.util.Properties;
 // TODO Take a look on Owner library - http://owner.aeonbits.org/
 public class PropertyManager {
     private static PropertyManager instance;
-    private static String propertyFilePath = "src/main/resources/config.properties";
+    private static String propertyFilePath = "src/main/resources/Configuration.properties";
     private static String url;
     private static String login;
     private static String password;

@@ -4,10 +4,10 @@ public enum SubMenuItems {
 
     SUPPORT("Support"),
     DATES("Dates"),
-    COMPLEXTABLE("Complex Table"),
-    SIMPLETABLE("Simple Table"),
-    PAGESTABLE("Table with pages"),
-    DIFFELEMENTS("Different elements");
+    COMPLEX_TABLE("Complex Table"),
+    SIMPLE_TABLE("Simple Table"),
+    PAGES_TABLE("Table with pages"),
+    DIFFERENT_ELEMENTS("Different elements");
 
     private String record;
 

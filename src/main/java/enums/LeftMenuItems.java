@@ -4,10 +4,10 @@ package enums;
 public enum LeftMenuItems {
 
     SERVICE("Service"),
-    CONTACTFORM("Contact form"),
+    CONTACT_FORM("Contact form"),
     HOME("Home"),
-    METALSCOLORS("Metals & Colors"),
-    ELEMENTSPACK("Elements packs");
+    METALS_COLORS("Metals & Colors"),
+    ELEMENTS_PACK("Elements packs");
 
     private String record;
 

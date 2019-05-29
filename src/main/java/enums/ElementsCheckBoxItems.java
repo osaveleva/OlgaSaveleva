@@ -1,7 +1,7 @@
 package enums;
 
 
-public enum CheckBoxItems {
+public enum ElementsCheckBoxItems {
 
     WATER("Water"),
     EARTH("Earth"),
@@ -10,7 +10,7 @@ public enum CheckBoxItems {
 
     private String record;
 
-    CheckBoxItems(String record) {
+    ElementsCheckBoxItems(String record) {
         this.record = record;
     }
 

@@ -2,7 +2,7 @@ package enums;
 
 public enum LogRecordsRadioButton {
 
-    SELEN("metal: value changed to Selen");
+    TEMPALTE("metal: value changed to %s");
 
     private String record;
 
@@ -10,8 +10,8 @@ public enum LogRecordsRadioButton {
         this.record = record;
     }
 
-    public String getRecord() {
-        return record;
+    public String getRecord(String element) {
+        return String.format(record, element);
     }
 
 

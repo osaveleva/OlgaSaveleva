@@ -2,7 +2,7 @@ package enums;
 
 public enum LogRecordsDropDown {
 
-    YELLOW("Colors: value changed to Yellow");
+    TEMPALTE("Colors: value changed to %s");
 
     private String record;
 
@@ -10,8 +10,8 @@ public enum LogRecordsDropDown {
         this.record = record;
     }
 
-    public String getRecord() {
-        return record;
+    public String getRecord(String element) {
+        return String.format(record, element);
     }
 
 
