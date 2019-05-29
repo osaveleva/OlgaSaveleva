@@ -1,7 +1,7 @@
 package enums;
 
 
-public enum MetalRadioButtonItems {
+public enum MetalsRadioButton {
 
     GOLD("Gold"),
     SILVER("Silver"),
@@ -10,7 +10,7 @@ public enum MetalRadioButtonItems {
 
     private String record;
 
-    MetalRadioButtonItems(String record) {
+    MetalsRadioButton(String record) {
         this.record = record;
     }
 

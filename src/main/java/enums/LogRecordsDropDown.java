@@ -2,7 +2,7 @@ package enums;
 
 public enum LogRecordsDropDown {
 
-    TEMPALTE("Colors: value changed to %s");
+    TEMPLATE("Colors: value changed to %s");
 
     private String record;
 

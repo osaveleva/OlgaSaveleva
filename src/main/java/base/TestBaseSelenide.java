@@ -1,6 +1,7 @@
 package base;
 
 import com.codeborne.selenide.Configuration;
+import org.aeonbits.owner.ConfigFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pageObjects.ServiceSelenidePageObject;

@@ -1,7 +1,7 @@
 package enums;
 
 
-public enum ColorsDropDownItems {
+public enum ColorsDropDowns {
 
     RED("Red"),
     YELLOW("Yellow"),
@@ -10,7 +10,7 @@ public enum ColorsDropDownItems {
 
     private String record;
 
-    ColorsDropDownItems(String record) {
+    ColorsDropDowns(String record) {
         this.record = record;
     }
 

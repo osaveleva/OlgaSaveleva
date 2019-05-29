@@ -1,14 +1,15 @@
 package pageObjects;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import enums.LeftMenuItems;
 import enums.LogRecordsFromTo;
-import io.qameta.allure.Step;
+import enums.SubMenuItems;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
@@ -26,13 +27,13 @@ public class DatesSelenidePageObjectAllure {
     private SelenideElement loginButton;
 
     @FindBy(css = "#user-name")
-    public SelenideElement userName;
+    private SelenideElement userName;
 
     @FindBy(css = ".sidebar-menu > li")
-    public List<SelenideElement> menuCollection;
+    public ElementsCollection menuCollection;
 
     @FindBy(css = ".sub > li")
-    public List<SelenideElement> subCollection;
+    private ElementsCollection subCollection;
 
     @FindBy(css = ".ui-slider")
     public SelenideElement slider;
@@ -43,7 +44,9 @@ public class DatesSelenidePageObjectAllure {
     @FindBy(css = ".ui-slider-handle:nth-child(3)")
     public SelenideElement to;
 
-    @Step
+    @FindBy(css = ".panel-body-list > li")
+    private ElementsCollection logCollection;
+
     public void login(String name, String password) {
         profileButton.click();
         nameField.sendKeys(name);
@@ -51,19 +54,30 @@ public class DatesSelenidePageObjectAllure {
         loginButton.click();
     }
 
-    @Step
-    public SelenideElement clickMenuItem(List<SelenideElement> collection, String str) {
-        for (SelenideElement ele : collection) {
-            if (ele.getText().equals(str)) {
-                ele.click();
-                return ele;
-            }
-        }
-        return null;
+    public void clickDiffElementMenuItem() {
+        subCollection.findBy(text(SubMenuItems.DATES.getRecord())).click();
     }
 
-    @Step
-    public void moveSlider(int fromExpected, int toExpected, double px) {
+    public void checkUserNameTitle(String configValue) {
+        userName.shouldHave(text(configValue));
+    }
+
+    private void clickServicetMenuItem(String str) {
+        menuCollection.findBy(text(str)).click();
+    }
+
+
+    public void checkServiceMenu() {
+        clickServicetMenuItem(LeftMenuItems.SERVICE.getRecord());
+        for (SubMenuItems sm : SubMenuItems.values()) {
+            subCollection.findBy(text(sm.getRecord())).should(exist);
+        }
+    }
+
+    public void moveSlider(int fromExpected, int toExpected) {
+        String offsetWidth = slider.getAttribute("offsetWidth");
+        double step = Double.valueOf(offsetWidth) / 100;
+        double px = Math.round(step * 10.0) / 10.0;
         Actions act = new Actions(getWebDriver());
         int originalFrom = Integer.valueOf(from.getText());
         int originalTo = Integer.valueOf(to.getText());
@@ -74,16 +88,15 @@ public class DatesSelenidePageObjectAllure {
             act.dragAndDropBy(from, (int) Math.round((fromExpected - originalFrom) * px), 0).build().perform();
             act.dragAndDropBy(to, (int) Math.round((toExpected - originalTo) * px), 0).build().perform();
         }
+        from.shouldHave(exactText(String.valueOf(fromExpected)));
+        to.shouldHave(exactText(String.valueOf(toExpected)));
     }
 
-    @Step
-    public List<String> makeListLog(int fromExpected, int toExpected) {
-        List<String> logList = new ArrayList<>();
-        logList.clear();
-        logList.add(LogRecordsFromTo.FROM.getRecord() + fromExpected + LogRecordsFromTo.LINK.getRecord());
-        logList.add(LogRecordsFromTo.TO.getRecord() + toExpected + LogRecordsFromTo.LINK.getRecord());
-        return logList;
+    public void checkLogs(String fromValue, String toValue) {
+        logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("From", fromValue))).shouldBe(visible);
+        logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("To", toValue))).shouldBe(visible);
     }
+
 
 }
 

@@ -2,7 +2,7 @@ package enums;
 
 public enum LogRecordsCheckBox {
 
-    TEMPALTE("%s: condition changed to %s");
+    TEMPLATE("%s: condition changed to %s");
     private String record;
 
     LogRecordsCheckBox(String record) {

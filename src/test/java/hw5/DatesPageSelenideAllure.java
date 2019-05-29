@@ -1,22 +1,22 @@
-package hw4;
+package hw5;
 
 import base.TestBaseSelenide;
 import org.aeonbits.owner.ConfigFactory;
+import pageObjects.DatesSelenidePageObjectAllure;
 import utilities.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.DatesSelenidePageObject;
 
-import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
 
-public class DatesPageSelenide extends TestBaseSelenide {
+public class DatesPageSelenideAllure extends TestBaseSelenide {
 
-    private DatesSelenidePageObject datePage;
+    private DatesSelenidePageObjectAllure datePage;
     private Configuration cfg;
 
 
@@ -24,7 +24,7 @@ public class DatesPageSelenide extends TestBaseSelenide {
     public void beforeClass() {
 
         cfg = ConfigFactory.create(Configuration.class);
-        datePage = open(cfg.url(), DatesSelenidePageObject.class);
+        datePage = open(cfg.url(), DatesSelenidePageObjectAllure.class);
     }
 
     @Test

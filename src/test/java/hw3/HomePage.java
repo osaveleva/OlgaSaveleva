@@ -65,10 +65,10 @@ public class HomePage extends TestBase{
        homePageObject.checkLeftMenu();
 
       //7. Assert that there are 4 images on the Index Page and they are displayed
-       homePageObject.checkBenefits(cfg.iconSize());
+       homePageObject.checkBenefits();
 
       //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
-       homePageObject.checkSubText(SubTextValues.values().length);
+       homePageObject.checkSubText();
 
       //9. Assert a text of the main headers
        homePageObject.checkTextHeaderTitleVisiblity();

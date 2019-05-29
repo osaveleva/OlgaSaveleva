@@ -1,5 +1,6 @@
 package pageObjects;
 
+import enums.ElementsNumber;
 import enums.LeftMenuItems;
 import enums.SubTextValues;
 import org.openqa.selenium.WebElement;
@@ -92,8 +93,8 @@ public class HomePageObject {
         }
     }
 
-    public void checkSubText(int configValue) {
-        assertEquals(textCollection.size(), configValue);
+    public void checkSubText() {
+        assertEquals(textCollection.size(), SubTextValues.values().length);
         for (SubTextValues st : SubTextValues.values()) {
             assertTrue(makeListCollection(textCollection).contains(st.getRecord()));
         }
@@ -102,8 +103,8 @@ public class HomePageObject {
         }
     }
 
-    public void checkBenefits(String configValue) {
-        int size = Integer.valueOf(configValue);
+    public void checkBenefits() {
+        int size = Integer.valueOf(ElementsNumber.ICONS_NUMBER.getRecord());
         assertEquals(icons.size(), size);
         for (WebElement ele : icons) {
             assertTrue(ele.isDisplayed());

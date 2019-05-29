@@ -16,6 +16,8 @@ public interface Configuration extends Config{
     String subheader();
     String iconSize();
     String dropdownCollectionSize();
+    String invalidUserName();
+
 }
 
 

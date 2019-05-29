@@ -1,4 +1,4 @@
-package hw4;
+package hw5;
 
 import base.TestBaseSelenide;
 import enums.*;
@@ -6,6 +6,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.ServiceSelenidePageObject;
+import pageObjects.ServiceSelenidePageObjectAllure;
 import utilities.Configuration;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -13,16 +14,16 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
 
-public class ServicePageSelenide extends TestBaseSelenide {
+public class ServicePageSelenideAllure extends TestBaseSelenide {
 
-    private ServiceSelenidePageObject servicePage;
+    private ServiceSelenidePageObjectAllure servicePage;
     private Configuration cfg;
 
     @BeforeClass
     public void beforeClass() {
 
         cfg = ConfigFactory.create(Configuration.class);
-        servicePage = open(cfg.url(), ServiceSelenidePageObject.class);
+        servicePage = open(cfg.url(), ServiceSelenidePageObjectAllure.class);
 
     }
 

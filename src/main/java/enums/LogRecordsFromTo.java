@@ -2,9 +2,7 @@ package enums;
 
 public enum LogRecordsFromTo {
 
-    FROM("Range 2(From):"),
-    TO("Range 2(To):"),
-    LINK(" link clicked");
+    TEMPLATE("Range 2(%s):%s link clicked");
 
     private String record;
 
@@ -12,8 +10,7 @@ public enum LogRecordsFromTo {
         this.record = record;
     }
 
-    public String getRecord() {
-        return record;
+    public String getRecord(String ToFrom, String value) {
+        return String.format(record, ToFrom, value);
     }
-
 }

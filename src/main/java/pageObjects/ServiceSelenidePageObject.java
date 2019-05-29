@@ -2,16 +2,12 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import enums.LogRecordsCheckBox;
-import enums.LogRecordsDropDown;
-import enums.LogRecordsRadioButton;
-import enums.SubMenuItems;
+import enums.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$$;
 
 
 public class ServiceSelenidePageObject {
@@ -87,8 +83,8 @@ public class ServiceSelenidePageObject {
     }
 
 
-    public void clickDiffElementMenuItem(String str) {
-        subCollection.findBy(text(str)).click();
+    public void clickDiffElementMenuItem() {
+        subCollection.findBy(text(SubMenuItems.DIFFERENT_ELEMENTS.getRecord())).click();
     }
 
     private void clickServicetMenuItem(String str) {
@@ -109,8 +105,8 @@ public class ServiceSelenidePageObject {
         userName.shouldHave(text(configValue));
     }
 
-    public void checkServiceMenu(String configValue) {
-        clickServicetMenuItem(configValue);
+    public void checkServiceMenu() {
+        clickServicetMenuItem(LeftMenuItems.SERVICE.getRecord());
         for (SubMenuItems sm : SubMenuItems.values()) {
             subCollection.findBy(text(sm.getRecord())).should(exist);
         }
@@ -126,20 +122,20 @@ public class ServiceSelenidePageObject {
     }
 
 
-    public void checkCheckBoxCollection(int configValue) {
-        checkboxCollection.shouldHaveSize(configValue);
+    public void checkCheckBoxCollection() {
+        checkboxCollection.shouldHaveSize(ElementsCheckBox.values().length);
     }
 
-    public void checkRadioButtonCollection(int configValue) {
-        radioButtonCollection.shouldHaveSize(configValue);
+    public void checkRadioButtonCollection() {
+        radioButtonCollection.shouldHaveSize(MetalsRadioButton.values().length);
     }
 
-    public void checkDropDownCollection(String configValue) {
-        dropdownCollection.shouldHaveSize(Integer.valueOf(configValue));
+    public void checkDropDownCollection() {
+        dropdownCollection.shouldHaveSize(Integer.valueOf(ElementsNumber.DROPDOWN_NUMBER.getRecord()));
     }
 
-    public void checkButtonCollection(int configValue) {
-        buttonCollection.shouldHaveSize(configValue);
+    public void checkButtonCollection() {
+        buttonCollection.shouldHaveSize(DiffElementButtons.values().length);
     }
 
     public void checkRightSection() {
@@ -151,10 +147,9 @@ public class ServiceSelenidePageObject {
     }
 
 
-
     public void checkCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPALTE.getRecord("Water", "true"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPALTE.getRecord("Wind", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
     }
 
     public void checkRadioButtonLogRecords() {
@@ -162,7 +157,7 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkDropDownLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsDropDown.TEMPALTE.getRecord("Yellow"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsDropDown.TEMPLATE.getRecord("Yellow"))).shouldBe(visible);
     }
 }
 
