@@ -2,8 +2,10 @@ package utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
+// TODO Take a look on Owner library - http://owner.aeonbits.org/
 public class PropertyManager {
     private static PropertyManager instance;
     private static String propertyFilePath = "src/main/resources/config.properties";
@@ -18,23 +20,24 @@ public class PropertyManager {
     private static String iconSize;
     private static String dropdownCollectionSize;
 
+    private PropertyManager() {
+    }
 
     public static PropertyManager getInstance() {
-        instance = new PropertyManager();
-        instance.loadData();
+        // TODO
+        if (Objects.isNull(instance)) {
+            instance = new PropertyManager();
+            instance.loadData();
+        }
 
         return instance;
     }
 
-
     private void loadData() {
-
         Properties prop = new Properties();
-
 
         try {
             prop.load(new FileInputStream(propertyFilePath));
-
         } catch (IOException e) {
             System.out.println("Configuration properties file cannot be found");
         }
@@ -49,7 +52,6 @@ public class PropertyManager {
         subheader = prop.getProperty("subheader");
         iconSize = prop.getProperty("iconSize");
         dropdownCollectionSize = prop.getProperty("dropdownCollectionSize");
-
     }
 
     public String getURL() {

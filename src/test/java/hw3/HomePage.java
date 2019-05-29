@@ -1,7 +1,6 @@
 package hw3;
 
 import base.TestBase;
-import enums.LeftMenuItems;
 import enums.SubTextValues;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -56,16 +55,12 @@ public class HomePage extends TestBase {
         //5. Assert browser title
         assertEquals(driver.getTitle(), PropertyManager.getInstance().getMainDriverTitle());
 
-        // TODO Why don't you create one single method for each steps 6,7,8 ?
-        // TODO Basically, it is not really great idea to work with PO elements directly.
-        //      This is possible is some cases, but in general we should create a methods, that allow us
-        //      to make low-level selenium calls, just keep it in your mind.
-
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        assertTrue(homePageObject.checkLeftMenuProperty(LeftMenuItems.values().length));
+        // TODO
+        homePageObject.checkLeftMenu();
 
         //7. Assert that there are 4 images on the Index Page and they are displayed
-        assertTrue(homePageObject.checkIconProperty(PropertyManager.getInstance().getIconSize()));
+        assertTrue(homePageObject.checkBenefits(PropertyManager.getInstance().getIconSize()));
 
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
         assertTrue(homePageObject.checkSubTextProperty(SubTextValues.values().length));
@@ -96,6 +91,5 @@ public class HomePage extends TestBase {
 
         //16. Assert that there is Footer
         assertTrue(homePageObject.checkFooterVisibility());
-
     }
 }
