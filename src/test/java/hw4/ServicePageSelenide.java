@@ -43,36 +43,45 @@ public class ServicePageSelenide extends TestBaseSelenide {
         servicePage.clickDiffElementMenuItem(SubMenuItems.DIFFELEMENTS.getRecord());
 
         //6. Check interface on Different elements page, it contains all needed elements
+        //6.1 Assert that there are 4 checkboxes
         servicePage.checkCheckBoxCollectionSize(CheckBoxItems.values().length);
+
+        //6.2. Assert that there are 4 radioButtons
         servicePage.checkRadioButtonCollectionSize(RadioButtonItems.values().length);
+
+        //6.3. Assert that there is 1 dropdown list
         servicePage.checkDropDownCollectionSize(PropertyManager.getInstance().getDropdownCollectionSize());
+
+        //6.4. Assert that there are 2 butttons
         servicePage.checkButtonCollectionSize(DiffElementButtons.values().length);
 
         //7. Assert that there is Right Section
 
         servicePage.checkRightSectionVisibility();
+
         //8. Assert that there is Left Section
         servicePage.checkLeftSectionVisibility();
+
         //9. Select checkboxes
-        servicePage.checkCheckBoxRadioButtonStatus(CheckBoxItems.WIND.getRecord());
-        servicePage.checkCheckBoxRadioButtonStatus(CheckBoxItems.WATER.getRecord());
-        //servicePage.checkCheckBoxStatus(CheckBoxItems.WIND.getRecord());
-    //   servicePage.checkCheckBoxStatus(CheckBoxItems.WATER.getRecord());
-    //   //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-         servicePage.checkCheckBoxLogRecords();
-    //   //11. Select radio
-    //   servicePage.checkRadioButtonStatus(RadioButtonItems.SELEN.getRecord());
-    //   //12. Assert that for radiobutton there is a log row and value is corresponded to the status of radiobutton.
-    //   servicePage.checkRadioButtonLogRecords();
+        servicePage.checkCheckBoxStatus(CheckBoxItems.WIND.getRecord());
+        servicePage.checkCheckBoxStatus(CheckBoxItems.WATER.getRecord());
 
+        //   //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
+        servicePage.checkCheckBoxLogRecords();
 
+        //   //11. Select radio
+        servicePage.checkRadioButtonStatus(RadioButtonItems.SELEN.getRecord());
+
+        //   //12. Assert that for radiobutton there is a log row and value is corresponded to the status of radiobutton.
+        servicePage.checkRadioButtonLogRecords();
 
         //13. Select in dropdown
-//servicePage.clickDropDown();
-//servicePage.clickMenuItem(servicePage.dropdonwItemCollection, "Yellow").shouldBe(selected);
-   //14. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-//for (LogRecordsDropDown dd : LogRecordsDropDown.values()) {
-//$$(".panel-body-list.logs > li").findBy(text(dd.getRecord())).should(exist);
-//}
+        servicePage.clickDropDown(DropDownItems.YELLOW.getRecord());
+
+        //14. Assert that yellow item is selected
+        servicePage.checkDropDownValue(DropDownItems.YELLOW.getRecord());
+
+        //14. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
+        servicePage.checkDropDownLogRecords();
     }
 }

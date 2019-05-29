@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import enums.LogRecordsFromTo;
+import enums.SubMenuItems;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.Keys;
@@ -13,6 +14,8 @@ import java.util.FormatFlagsConversionMismatchException;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.forward;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -38,7 +41,7 @@ public class DatesSelenidePageObject {
     public ElementsCollection menuCollection;
 
     @FindBy(css = ".sub > li")
-    public List<SelenideElement> subCollection;
+    public ElementsCollection subCollection;
 
     @FindBy(css = ".ui-slider")
     public SelenideElement slider;
@@ -64,6 +67,32 @@ public class DatesSelenidePageObject {
             }
         }
         return null;
+    }
+    private void clickServicetMenuItem(String str) {
+        for (SelenideElement ele : menuCollection) {
+            if (ele.getText().equals(str)) {
+                ele.click();
+                return;
+            }
+        }
+
+    }
+
+    public void clickDMenuItem(String str) {
+        for (SelenideElement ele : subCollection) {
+            if (ele.getText().equals(str)) {
+                ele.click();
+                return;
+            }
+        }
+
+    }
+
+    public void checkServiceMenu(String configValue) {
+        clickServicetMenuItem(configValue);
+        for (SubMenuItems sm : SubMenuItems.values()) {
+            subCollection.findBy(text(sm.getRecord())).should(exist);
+        }
     }
 
     public void moveSlider(int fromExpected, int toExpected, double px) {

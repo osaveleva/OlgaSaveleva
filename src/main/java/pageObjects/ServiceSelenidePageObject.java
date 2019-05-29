@@ -3,6 +3,8 @@ package pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.LogRecordsCheckBox;
+import enums.LogRecordsDropDown;
+import enums.LogRecordsRadioButton;
 import enums.SubMenuItems;
 import org.openqa.selenium.support.FindBy;
 
@@ -32,7 +34,7 @@ public class ServiceSelenidePageObject {
     public List<SelenideElement> menuCollection;
 
     @FindBy(css = ".colors > select > option")
-    public List<SelenideElement> dropdonwItemCollection;
+    private ElementsCollection dropdonwItemCollection;
 
     @FindBy(css = ".colors")
     public SelenideElement dropdown;
@@ -57,6 +59,9 @@ public class ServiceSelenidePageObject {
 
     @FindBy(css = ".label-checkbox")
     private ElementsCollection checkboxRow;
+
+    @FindBy(css = ".label-radio")
+    private ElementsCollection radioButtonRow;
 
     @FindBy(css = ".label-radio input[type ='radio']")
     private List<SelenideElement> radioButtonValueCollection;
@@ -113,11 +118,15 @@ public class ServiceSelenidePageObject {
     }
 
 
-    public void checkCheckBoxRadioButtonStatus(String itemValue) {
+    public void checkCheckBoxStatus(String itemValue) {
         checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
         checkboxRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
     }
 
+    public void checkRadioButtonStatus(String itemValue) {
+        radioButtonRow.findBy(text(itemValue)).shouldBe(enabled).click();
+        radioButtonRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
+    }
 
     public void checkUserNameTitle(String configValue) {
         userName.shouldHave(text(configValue));
@@ -130,12 +139,15 @@ public class ServiceSelenidePageObject {
         }
     }
 
-    public void clickDropDown(String value) {
+    public void clickDropDown(String itemValue) {
         dropdown.click();
-        checkItem(radioButtonValueCollection, value).shouldBe(checked);
-
-
+        dropdonwItemCollection.findBy(text(itemValue)).shouldBe(enabled).click();
     }
+
+    public void checkDropDownValue(String itemValue) {
+        dropdonwItemCollection.findBy(text(itemValue)).shouldBe(selected);
+    }
+
 
     public void checkCheckBoxCollectionSize(int configValue) {
         checkboxCollection.shouldHaveSize(configValue);
@@ -162,24 +174,18 @@ public class ServiceSelenidePageObject {
     }
 
 
-    public void checkRadioButtonStatus(String value) {
-        checkItem(radioButtonValueCollection, value).shouldBe(checked);
-    }
 
     public void checkCheckBoxLogRecords() {
         checkboxLogRecords.findBy(text(LogRecordsCheckBox.WINDSELECTED.getRecord())).shouldBe(visible);
         checkboxLogRecords.findBy(text(LogRecordsCheckBox.WATERSELECTED.getRecord())).shouldBe(visible);
-
-
-      // for (LogRecordsCheckBox lg : LogRecordsCheckBox.values()) {
-
-      //     //checkboxLogRecords.findBy(text(lg.getRecord())).shouldBe(visible);
-      // }
     }
 
     public void checkRadioButtonLogRecords() {
-        for (LogRecordsCheckBox lg : LogRecordsCheckBox.values()) {
-            radioLogRecords.findBy(text(lg.getRecord())).shouldBe(visible);
-        }
+        checkboxLogRecords.findBy(text(LogRecordsRadioButton.SELEN.getRecord())).shouldBe(visible);
+    }
+
+    public void checkDropDownLogRecords() {
+        checkboxLogRecords.findBy(text(LogRecordsDropDown.YELLOW.getRecord())).shouldBe(visible);
     }
 }
+
