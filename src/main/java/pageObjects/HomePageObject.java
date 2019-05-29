@@ -7,7 +7,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -73,25 +75,21 @@ public class HomePageObject {
         return userName.getText();
     }
 
-
+    // TODO
     private List<String> makeListCollection(List<WebElement> collection) {
-        List<String> menuList = new ArrayList<>();
-        menuList.clear();
-        for (WebElement ele : collection) {
-            menuList.add(ele.getText());
-        }
-        return menuList;
+        return collection.stream()
+                .map(WebElement::getText)
+                .collect(toList());
     }
 
-    public boolean checkLeftMenuProperty(int configValue) {
-        assertEquals(sidebarItems.size(), configValue);
+    public void checkLeftMenu() {
+        assertEquals(sidebarItems.size(), LeftMenuItems.values().length);
         for (LeftMenuItems st : LeftMenuItems.values()) {
             assertTrue(makeListCollection(sidebarItems).contains(st.getRecord()));
         }
         for (WebElement ele : sidebarItems) {
             assertTrue(ele.isDisplayed());
         }
-        return true;
     }
 
     public boolean checkSubTextProperty(int configValue) {
@@ -105,7 +103,7 @@ public class HomePageObject {
         return true;
     }
 
-    public boolean checkIconProperty(String configValue) {
+    public boolean checkBenefits(String configValue) {
         int size = Integer.valueOf(configValue);
         assertEquals(icons.size(), size);
         for (WebElement ele : icons) {

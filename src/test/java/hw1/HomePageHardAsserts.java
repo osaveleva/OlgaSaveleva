@@ -66,8 +66,6 @@ public class HomePageHardAsserts {
         List<WebElement> sidebarItems = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         assertEquals(sidebarItems.size(), 5);
 
-        // TODO Yes, this is almost okay, but imagine the situation if menuCollection would be empty.
-        // What happened with your verification ?
         List<String> menuCollection = makeListCollection(sidebarItems);
         for (String elementMenu : listMenu) {
             assertTrue(menuCollection.contains(elementMenu));
@@ -93,7 +91,6 @@ public class HomePageHardAsserts {
         List<WebElement> textItems = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(textItems.size(), 4);
 
-        // TODO Same story like line 54
         List<String> textCollection = makeListCollection(driver.findElements(By.cssSelector("div.row > div .benefit-txt")));
         for (String elementText : listText) {
             assertTrue(textCollection.contains(elementText));
