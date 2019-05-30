@@ -1,7 +1,6 @@
 package hw3;
 
 import base.TestBase;
-import enums.SubTextValues;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -72,7 +71,7 @@ public class HomePage extends TestBase {
         homePageObject.checkSubText();
 
         //9. Assert a text of the main headers
-        homePageObject.checkTextHeaderTitleVisiblity();
+        homePageObject.checkTextHeaderTitle();
         homePageObject.checkMainHeaderTitle();
 
         //10. Assert that there is the iframe in the center of page

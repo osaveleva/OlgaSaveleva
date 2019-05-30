@@ -113,7 +113,7 @@ public class HomePageObject {
         }
     }
 
-    public void checkTextHeaderTitleVisiblity() {
+    public void checkTextHeaderTitle() {
         assertTrue(textHeader.isDisplayed());
     }
 
