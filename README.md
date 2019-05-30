@@ -33,3 +33,13 @@ Loops for searching items in left-hand section and for text under 4 images were 
 1. One method was created for each step 6,7,8
 2. Instead of working with PO elements directly methods are used
 3. Config.properties file and enums were added to remove all hardcoded values in test
+
+
+**HW3 and HW4 updates 30.05.2019**
+1. JAVA version 1.8. pom.xml changed for the JAVA version
+2. Configuration file was implement via Owner library. Configuration file contains only configuration paramenter: login, password, url.
+3. A separated class with constants was created for other values from HomePage.
+4. Constants in Enum were renamed.
+5. Methods in PO were renamed.
+6. Parameters are directly called in methods in PO.
+7. Template was used for logs generation.
