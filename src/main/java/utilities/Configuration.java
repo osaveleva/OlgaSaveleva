@@ -9,15 +9,6 @@ public interface Configuration extends Config{
     String url();
     String login();
     String password();
-    String logo();
-    String href();
-    String mainDriverTitle();
-    String pageTitle();
-    String subheader();
-    String iconSize();
-    String dropdownCollectionSize();
-    String invalidUserName();
-
 }
 
 

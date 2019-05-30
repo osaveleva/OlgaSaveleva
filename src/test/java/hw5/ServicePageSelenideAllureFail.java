@@ -11,11 +11,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import pageObjects.DatesSelenidePageObjectAllure;
-import pageObjects.ServiceSelenidePageObjectAllure;
+import pageObjects.ServiceSelenidePageObjectAllureFail;
 import utilities.Configuration;
 
-import static com.codeborne.selenide.Condition.*;
+import static utilities.HomePageValues.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
@@ -27,13 +26,13 @@ import static org.testng.Assert.assertEquals;
 public class ServicePageSelenideAllureFail extends TestBaseSelenide {
 
     private Configuration cfg;
-    private ServiceSelenidePageObjectAllure servicePage;
+    private ServiceSelenidePageObjectAllureFail servicePage;
 
     @BeforeClass
     public void beforeClass() {
 
         cfg = ConfigFactory.create(Configuration.class);
-        servicePage = open(cfg.url(), ServiceSelenidePageObjectAllure.class);
+        servicePage = open(cfg.url(), ServiceSelenidePageObjectAllureFail.class);
     }
 
     @AfterClass
@@ -46,13 +45,13 @@ public class ServicePageSelenideAllureFail extends TestBaseSelenide {
     public void checkServicePage() {
 
         //1. Assert Browser title
-        assertEquals(getWebDriver().getTitle(), cfg.mainDriverTitle());
+        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
 
         //2. Perform login
         servicePage.login(cfg.login(), cfg.password());
 
         //3. Assert User name in the left-top side of screen that user is loggined
-        servicePage.checkUserNameTitle(cfg.invalidUserName());
+        servicePage.checkUserNameTitle();
 
 
     }

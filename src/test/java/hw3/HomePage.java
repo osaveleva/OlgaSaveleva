@@ -13,11 +13,12 @@ import org.testng.annotations.Test;
 import pageObjects.HomePageObject;
 import utilities.Configuration;
 
+import static utilities.HomePageValues.*;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
-public class HomePage extends TestBase{
+
+public class HomePage extends TestBase {
 
     private WebDriver driver;
     private HomePageObject homePageObject;
@@ -48,53 +49,53 @@ public class HomePage extends TestBase{
         //1. Open test site by URL
         driver.navigate().to(cfg.url());
 
-       //2. Assert browser title
-       assertEquals(driver.getTitle(), cfg.mainDriverTitle());
+        //2. Assert browser title
+        assertEquals(driver.getTitle(), MAINDRIVERTITLE);
 
-      //3. Perform login
-       homePageObject.login(cfg.login(), cfg.password());
+        //3. Perform login
+        homePageObject.login(cfg.login(), cfg.password());
 
-      //4. Assert User name in the left-top side of screen that user is loggined;
-       assertEquals(homePageObject.geTitle(), cfg.pageTitle());
+        //4. Assert User name in the left-top side of screen that user is loggined;
+        assertEquals(homePageObject.geTitle(), PAGETITLE);
 
-      //5. Assert browser title
-       assertEquals(driver.getTitle(), cfg.mainDriverTitle());
+        //5. Assert browser title
+        assertEquals(driver.getTitle(), MAINDRIVERTITLE);
 
-      //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-       // TODO
-       homePageObject.checkLeftMenu();
+        //6. Assert that there are 4 items on the header section are displayed and they have proper texts
+        // TODO
+        homePageObject.checkLeftMenu();
 
-      //7. Assert that there are 4 images on the Index Page and they are displayed
-       homePageObject.checkBenefits();
+        //7. Assert that there are 4 images on the Index Page and they are displayed
+        homePageObject.checkBenefits();
 
-      //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
-       homePageObject.checkSubText();
+        //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
+        homePageObject.checkSubText();
 
-      //9. Assert a text of the main headers
-       homePageObject.checkTextHeaderTitleVisiblity();
-       homePageObject.checkMainHeaderTitle();
+        //9. Assert a text of the main headers
+        homePageObject.checkTextHeaderTitleVisiblity();
+        homePageObject.checkMainHeaderTitle();
 
-      //10. Assert that there is the iframe in the center of page
-       homePageObject.checkIframe();
+        //10. Assert that there is the iframe in the center of page
+        homePageObject.checkIframe();
 
-      //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-       String mainWindowHandle = driver.getWindowHandle();
-       driver.switchTo().frame(homePageObject.iframe);
-       homePageObject.checkLogo(cfg.logo());
+        //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
+        String mainWindowHandle = driver.getWindowHandle();
+        driver.switchTo().frame(homePageObject.iframe);
+        homePageObject.checkLogo();
 
-      //12. Switch to original window back
-       driver.switchTo().window(mainWindowHandle);
+        //12. Switch to original window back
+        driver.switchTo().window(mainWindowHandle);
 
-      //13. Assert a text of the sub header
-       homePageObject.checkSubHeader(cfg.subheader());
+        //13. Assert a text of the sub header
+        homePageObject.checkSubHeader();
 
-      //14. Assert that JDI GITHUB is a link and has a proper URL
-       homePageObject.checkSubHeaderLink(cfg.href());
+        //14. Assert that JDI GITHUB is a link and has a proper URL
+        homePageObject.checkSubHeaderLink();
 
-      //15. Assert that there is Left Section
-       homePageObject.checkLeftSection();
+        //15. Assert that there is Left Section
+        homePageObject.checkLeftSection();
 
-      //16. Assert that there is Footer
-       homePageObject.checkFooter();
+        //16. Assert that there is Footer
+        homePageObject.checkFooter();
     }
 }

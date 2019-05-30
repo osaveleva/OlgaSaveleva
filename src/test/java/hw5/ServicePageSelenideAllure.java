@@ -1,11 +1,15 @@
 package hw5;
 
 import base.TestBaseSelenide;
+import com.codeborne.selenide.WebDriverRunner;
 import enums.*;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.aeonbits.owner.ConfigFactory;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pageObjects.ServiceSelenidePageObject;
+import static utilities.HomePageValues.*;
 import pageObjects.ServiceSelenidePageObjectAllure;
 import utilities.Configuration;
 
@@ -13,7 +17,8 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
-
+@Feature("Smoke test")
+@Story("ServicePage testing")
 public class ServicePageSelenideAllure extends TestBaseSelenide {
 
     private ServiceSelenidePageObjectAllure servicePage;
@@ -24,20 +29,24 @@ public class ServicePageSelenideAllure extends TestBaseSelenide {
 
         cfg = ConfigFactory.create(Configuration.class);
         servicePage = open(cfg.url(), ServiceSelenidePageObjectAllure.class);
+    }
 
+    @AfterClass
+    public void afterClass(){
+        WebDriverRunner.getWebDriver().close();
     }
 
     @Test
     public void checkServicePage() {
 
         //1. Assert Browser title
-        assertEquals(getWebDriver().getTitle(), cfg.mainDriverTitle());
+        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
 
         //2. Perform login
         servicePage.login(cfg.login(), cfg.password());
 
         //3. Assert User name in the left-top side of screen that user is loggined
-        servicePage.checkUserNameTitle(cfg.pageTitle());
+        servicePage.checkUserNameTitle();
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
         servicePage.checkServiceMenu();

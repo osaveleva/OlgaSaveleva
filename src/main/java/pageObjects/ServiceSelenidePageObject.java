@@ -3,11 +3,13 @@ package pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.*;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
+import static utilities.HomePageValues.*;
 
 
 public class ServiceSelenidePageObject {
@@ -74,7 +76,7 @@ public class ServiceSelenidePageObject {
     @FindBy(css = ".panel-body-list.logs > li")
     private ElementsCollection radioLogRecords;
 
-
+    @Step
     public void login(String name, String password) {
         profileButton.click();
         nameField.sendKeys(name);
@@ -82,29 +84,34 @@ public class ServiceSelenidePageObject {
         loginButton.click();
     }
 
-
+    @Step
     public void clickDiffElementMenuItem() {
         subCollection.findBy(text(SubMenuItems.DIFFERENT_ELEMENTS.getRecord())).click();
     }
 
+    @Step
     private void clickServicetMenuItem(String str) {
         menuCollection.findBy(text(str)).click();
     }
 
+    @Step
     public void checkCheckBox(String itemValue) {
         checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
         checkboxRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
     }
 
+    @Step
     public void checkRadioButton(String itemValue) {
         radioButtonRow.findBy(text(itemValue)).shouldBe(enabled).click();
         radioButtonRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
     }
 
-    public void checkUserNameTitle(String configValue) {
-        userName.shouldHave(text(configValue));
+    @Step
+    public void checkUserNameTitle() {
+        userName.shouldHave(text(PAGETITLE));
     }
 
+    @Step
     public void checkServiceMenu() {
         clickServicetMenuItem(LeftMenuItems.SERVICE.getRecord());
         for (SubMenuItems sm : SubMenuItems.values()) {
@@ -112,50 +119,59 @@ public class ServiceSelenidePageObject {
         }
     }
 
+    @Step
     public void clickDropDown(String itemValue) {
         dropdown.click();
         dropdonwItemCollection.findBy(text(itemValue)).shouldBe(enabled).click();
     }
 
+    @Step
     public void checkDropDown(String itemValue) {
         dropdonwItemCollection.findBy(text(itemValue)).shouldBe(selected);
     }
 
-
+    @Step
     public void checkCheckBoxCollection() {
         checkboxCollection.shouldHaveSize(ElementsCheckBox.values().length);
     }
 
+    @Step
     public void checkRadioButtonCollection() {
         radioButtonCollection.shouldHaveSize(MetalsRadioButton.values().length);
     }
 
+    @Step
     public void checkDropDownCollection() {
         dropdownCollection.shouldHaveSize(Integer.valueOf(ElementsNumber.DROPDOWN_NUMBER.getRecord()));
     }
 
+    @Step
     public void checkButtonCollection() {
         buttonCollection.shouldHaveSize(DiffElementButtons.values().length);
     }
 
+    @Step
     public void checkRightSection() {
         rightSection.shouldBe(visible);
     }
 
+    @Step
     public void checkLeftSection() {
         leftSection.shouldBe(visible);
     }
 
-
+    @Step
     public void checkCheckBoxLogRecords() {
         checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
         checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
     }
 
+    @Step
     public void checkRadioButtonLogRecords() {
         checkboxLogRecords.findBy(text(LogRecordsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
     }
 
+    @Step
     public void checkDropDownLogRecords() {
         checkboxLogRecords.findBy(text(LogRecordsDropDown.TEMPLATE.getRecord("Yellow"))).shouldBe(visible);
     }

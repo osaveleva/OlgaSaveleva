@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static utilities.HomePageValues.*;
 
 
 public class DatesSelenidePageObject {
@@ -58,8 +59,8 @@ public class DatesSelenidePageObject {
         subCollection.findBy(text(SubMenuItems.DATES.getRecord())).click();
     }
 
-    public void checkUserNameTitle(String configValue) {
-        userName.shouldHave(text(configValue));
+    public void checkUserNameTitle() {
+        userName.shouldHave(text(PAGETITLE));
     }
 
     private void clickServicetMenuItem(String str) {

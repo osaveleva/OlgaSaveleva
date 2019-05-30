@@ -11,6 +11,7 @@ import utilities.Configuration;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
+import static utilities.HomePageValues.*;
 
 
 public class ServicePageSelenide extends TestBaseSelenide {
@@ -30,13 +31,13 @@ public class ServicePageSelenide extends TestBaseSelenide {
     public void checkServicePage() {
 
         //1. Assert Browser title
-        assertEquals(getWebDriver().getTitle(), cfg.mainDriverTitle());
+        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
 
         //2. Perform login
         servicePage.login(cfg.login(), cfg.password());
 
         //3. Assert User name in the left-top side of screen that user is loggined
-        servicePage.checkUserNameTitle(cfg.pageTitle());
+        servicePage.checkUserNameTitle();
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
         servicePage.checkServiceMenu();

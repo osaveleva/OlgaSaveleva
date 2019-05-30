@@ -6,6 +6,8 @@ import enums.SubTextValues;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static utilities.HomePageValues.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +58,7 @@ public class HomePageObject {
     public WebElement logo;
 
     @FindBy(css = "h3:nth-child(3)>a")
-    public WebElement subheader;
+    private WebElement subheader;
 
     @FindBy(css = "#mCSB_1")
     private WebElement leftSection;
@@ -131,17 +133,18 @@ public class HomePageObject {
         assertTrue(footer.isDisplayed());
     }
 
-    public void checkLogo(String configValue) {
-        assertEquals(logo.getAttribute("src"), configValue);
+    public void checkLogo() {
+        assertEquals(logo.getAttribute("src"), LOGO);
     }
 
-    public void checkSubHeader(String configValue) {
-        assertEquals(subheader.getText(), configValue);
+    public void checkSubHeader() {
+        assertEquals(subheader.getText(), SUBHEADER);
     }
 
-    public void checkSubHeaderLink(String configValue) {
-        assertEquals(subheader.getAttribute("href"), configValue);
+    public void checkSubHeaderLink() {
+        assertEquals(subheader.getAttribute("href"), HREF);
     }
+
 
 }
 

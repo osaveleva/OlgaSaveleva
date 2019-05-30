@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.DatesSelenidePageObject;
 
-import java.util.List;
+import static utilities.HomePageValues.*;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -31,13 +31,13 @@ public class DatesPageSelenide extends TestBaseSelenide {
     public void checkServicePage() {
 
         //1. Assert Browser title
-        assertEquals(getWebDriver().getTitle(), cfg.mainDriverTitle());
+        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
 
         //2. Perform login
         datePage.login(cfg.login(), cfg.password());
 
         //3. Assert User name in the left-top side of screen that user is loggined
-        datePage.checkUserNameTitle(cfg.pageTitle());
+        datePage.checkUserNameTitle();
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
         datePage.checkServiceMenu();
