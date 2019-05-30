@@ -14,7 +14,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static utilities.HomePageValues.*;
 
 
-
 public class DatesSelenidePageObjectAllure {
     @FindBy(css = ".profile-photo")
     private SelenideElement profileButton;
