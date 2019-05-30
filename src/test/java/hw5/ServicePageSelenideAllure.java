@@ -9,7 +9,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 import pageObjects.ServiceSelenidePageObjectAllure;
 import utilities.Configuration;
 

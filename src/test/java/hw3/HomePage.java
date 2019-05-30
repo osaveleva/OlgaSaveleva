@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import pageObjects.HomePageObject;
 import utilities.Configuration;
 
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
 import static org.testng.Assert.assertEquals;
 

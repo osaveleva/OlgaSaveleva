@@ -1,4 +1,4 @@
-package utilities;
+package base;
 
 public final class HomePageValues {
     public static final String LOGO = "https://epam.github.io/JDI/images/Logo_Epam_Color.svg";

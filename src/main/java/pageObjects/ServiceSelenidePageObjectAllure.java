@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
 
 public class ServiceSelenidePageObjectAllure {

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
 
 public class DatesSelenidePageObjectAllure {

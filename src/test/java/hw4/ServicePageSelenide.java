@@ -11,7 +11,7 @@ import utilities.Configuration;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
 
 public class ServicePageSelenide extends TestBaseSelenide {

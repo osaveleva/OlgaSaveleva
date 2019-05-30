@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.DatesSelenidePageObject;
 
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;

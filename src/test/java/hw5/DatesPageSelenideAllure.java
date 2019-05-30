@@ -10,7 +10,7 @@ import pageObjects.DatesSelenidePageObjectAllure;
 import utilities.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
 
 import static com.codeborne.selenide.Selenide.*;

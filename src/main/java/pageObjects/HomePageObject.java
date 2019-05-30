@@ -6,11 +6,9 @@ import enums.SubTextValues;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static utilities.HomePageValues.*;
+import static base.HomePageValues.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 import static org.testng.Assert.assertEquals;
