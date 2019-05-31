@@ -70,7 +70,7 @@ public class ServicePageSelenide extends TestBaseSelenide {
         servicePage.checkCheckBox(ElementsCheckBox.WATER.getRecord());
 
         //   //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-        servicePage.checkCheckBoxLogRecords();
+        servicePage.checkTrueCheckBoxLogRecords();
 
         //   //11. Select radio
         servicePage.checkRadioButton(MetalsRadioButton.SELEN.getRecord());
@@ -86,5 +86,12 @@ public class ServicePageSelenide extends TestBaseSelenide {
 
         //14. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
         servicePage.checkDropDownLogRecords();
+
+        //15. Unselect and assert checkboxes
+        servicePage.checkUnCheckBox(ElementsCheckBox.WIND.getRecord());
+        servicePage.checkUnCheckBox(ElementsCheckBox.WATER.getRecord());
+
+        //16. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
+        servicePage.checkFalseCheckBoxLogRecords();
     }
 }
