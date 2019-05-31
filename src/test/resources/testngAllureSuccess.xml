@@ -3,9 +3,10 @@
 <suite name="Test" parallel="methods" thread-count="3">
     <test name="Check">
 
-        <packages>
-            <package name="hw5.*"/>
-        </packages>
+        <classes>
+            <class name="hw5.DatesPageSelenideAllure"/>
+            <class name="hw5.ServicePageSelenideAllure"/>
+        </classes>
 
     </test>
 </suite>
