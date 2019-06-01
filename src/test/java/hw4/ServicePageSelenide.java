@@ -59,7 +59,6 @@ public class ServicePageSelenide extends TestBaseSelenide {
         servicePage.checkButtonCollection();
 
         //7. Assert that there is Right Section
-
         servicePage.checkRightSection();
 
         //8. Assert that there is Left Section
