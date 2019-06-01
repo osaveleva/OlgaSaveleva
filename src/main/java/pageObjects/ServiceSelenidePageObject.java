@@ -10,6 +10,8 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static base.HomePageValues.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static org.testng.Assert.assertEquals;
 
 
 public class ServiceSelenidePageObject {
@@ -166,6 +168,10 @@ public class ServiceSelenidePageObject {
     public void checkFalseCheckBoxLogRecords() {
         checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "false"))).shouldBe(visible);
         checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "false"))).shouldBe(visible);
+    }
+
+    public void checkTitle(){
+        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
     }
 
 }

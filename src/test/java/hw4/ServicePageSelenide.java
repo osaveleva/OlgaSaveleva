@@ -31,7 +31,7 @@ public class ServicePageSelenide extends TestBaseSelenide {
     public void checkServicePage() {
 
         //1. Assert Browser title
-        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
+        servicePage.checkTitle();
 
         //2. Perform login
         servicePage.login(cfg.login(), cfg.password());
