@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static base.HomePageValues.*;
+import static org.testng.Assert.assertEquals;
 
 
 public class DatesSelenidePageObject {
@@ -98,6 +99,9 @@ public class DatesSelenidePageObject {
         logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("To", toValue))).shouldBe(visible);
     }
 
+    public void checkTitle(){
+        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
+    }
 
 }
 
