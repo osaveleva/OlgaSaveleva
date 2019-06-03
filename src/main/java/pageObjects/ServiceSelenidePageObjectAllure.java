@@ -108,7 +108,7 @@ public class ServiceSelenidePageObjectAllure {
 
     @Step
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGETITLE));
+        userName.shouldHave(text(PAGE_TITLE));
     }
 
     @Step

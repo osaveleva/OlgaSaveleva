@@ -1,6 +1,5 @@
 package hw6;
 
-import base.TestBaseSelenide;
 import enums.ColorsDropDowns;
 import enums.ElementsCheckBox;
 import enums.MetalsRadioButton;
@@ -8,13 +7,10 @@ import org.aeonbits.owner.ConfigFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.ServiceCucumberPageObject;
-import pageObjects.ServiceSelenidePageObject;
 import utilities.Configuration;
 
-import static base.HomePageValues.MAINDRIVERTITLE;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
 
