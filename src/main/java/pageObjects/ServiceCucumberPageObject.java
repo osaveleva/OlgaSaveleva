@@ -203,7 +203,7 @@ public class ServiceCucumberPageObject {
 
     @Given("I'm on the Home Page")
     public void checkTitle() {
-//        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
+       assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
     }
 
 }
