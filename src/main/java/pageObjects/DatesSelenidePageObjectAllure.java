@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import enums.LeftMenuItems;
 import enums.LogRecordsFromTo;
 import enums.SubMenuItems;
+import io.qameta.allure.Step;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
@@ -48,6 +49,7 @@ public class DatesSelenidePageObjectAllure {
     @FindBy(css = ".panel-body-list > li")
     private ElementsCollection logCollection;
 
+    @Step("Login as ${name}:${password}" )
     public void login(String name, String password) {
         profileButton.click();
         nameField.sendKeys(name);
