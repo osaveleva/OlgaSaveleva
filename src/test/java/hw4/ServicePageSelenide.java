@@ -9,9 +9,7 @@ import pageObjects.ServiceSelenidePageObject;
 import utilities.Configuration;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
-import static base.HomePageValues.*;
 
 
 public class ServicePageSelenide extends TestBaseSelenide {
@@ -40,22 +38,27 @@ public class ServicePageSelenide extends TestBaseSelenide {
         servicePage.checkUserNameTitle();
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
+        // TODO
         servicePage.checkServiceMenu();
 
         //5. Open through the header menu Service -> Different Elements Page
+        // TODO
         servicePage.clickDiffElementMenuItem();
 
         //6. Check interface on Different elements page, it contains all needed elements
         //6.1 Assert that there are 4 checkboxes
-        servicePage.checkCheckBoxCollection();
+        servicePage.checkNatureElements();
 
         //6.2. Assert that there are 4 radioButtons
+        // TODO
         servicePage.checkRadioButtonCollection();
 
         //6.3. Assert that there is 1 dropdown list
+        // TODO
         servicePage.checkDropDownCollection();
 
         //6.4. Assert that there are 2 butttons
+        // TODO
         servicePage.checkButtonCollection();
 
         //7. Assert that there is Right Section
@@ -65,6 +68,8 @@ public class ServicePageSelenide extends TestBaseSelenide {
         servicePage.checkLeftSection();
 
         //9. Select checkboxes
+        // TODO 1. Method name
+        // TODO 2. Parameter type, might be several of it
         servicePage.checkCheckBox(ElementsCheckBox.WIND.getRecord());
         servicePage.checkCheckBox(ElementsCheckBox.WATER.getRecord());
 

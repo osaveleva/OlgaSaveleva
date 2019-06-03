@@ -3,7 +3,6 @@ package pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.*;
-import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import static base.HomePageValues.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
-
+// TODO PO name.
 public class ServiceSelenidePageObject {
     @FindBy(css = ".profile-photo")
     private SelenideElement profileButton;
@@ -109,7 +108,7 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGETITLE));
+        userName.shouldHave(text(PAGE_TITLE));
     }
 
     public void checkServiceMenu() {
@@ -128,7 +127,7 @@ public class ServiceSelenidePageObject {
         dropdonwItemCollection.findBy(text(itemValue)).shouldBe(selected);
     }
 
-    public void checkCheckBoxCollection() {
+    public void checkNatureElements() {
         checkboxCollection.shouldHaveSize(ElementsCheckBox.values().length);
     }
 
@@ -171,7 +170,7 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkTitle(){
-        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
+        assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
     }
 
 }

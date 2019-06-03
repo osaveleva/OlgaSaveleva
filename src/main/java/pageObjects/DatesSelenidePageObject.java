@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static base.HomePageValues.*;
+import static enums.LeftMenuItems.*;
 import static org.testng.Assert.assertEquals;
 
 
@@ -56,21 +57,20 @@ public class DatesSelenidePageObject {
         loginButton.click();
     }
 
-    public void clickDiffElementMenuItem() {
-        subCollection.findBy(text(SubMenuItems.DATES.getRecord())).click();
-    }
+//    public void clickDiffElementMenuItem() {
+//        subCollection.findBy(text(SubMenuItems.DATES.getRecord())).click();
+//    }
 
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGETITLE));
+        userName.shouldHave(text(PAGE_TITLE));
     }
 
-    private void clickServicetMenuItem(String str) {
-        menuCollection.findBy(text(str)).click();
+    // TODO
+    public void clickLeftMenuBaseItem(LeftMenuItems item) {
+        menuCollection.findBy(text(item.getRecord())).click();
     }
-
 
     public void checkServiceMenu() {
-        clickServicetMenuItem(LeftMenuItems.SERVICE.getRecord());
         for (SubMenuItems sm : SubMenuItems.values()) {
             subCollection.findBy(text(sm.getRecord())).should(exist);
         }
@@ -78,7 +78,7 @@ public class DatesSelenidePageObject {
 
     public void moveSlider(int fromExpected, int toExpected) {
         String offsetWidth = slider.getAttribute("offsetWidth");
-        double step = Double.valueOf(offsetWidth) / 100;
+        double step = Double.valueOf(offsetWidth) / 100.0;
         double px = Math.round(step * 10.0) / 10.0;
         Actions act = new Actions(getWebDriver());
         int originalFrom = Integer.valueOf(from.getText());
@@ -90,19 +90,27 @@ public class DatesSelenidePageObject {
             act.dragAndDropBy(from, (int) Math.round((fromExpected - originalFrom) * px), 0).build().perform();
             act.dragAndDropBy(to, (int) Math.round((toExpected - originalTo) * px), 0).build().perform();
         }
+    }
+
+    public void checkSliderPosition(int fromExpected, int toExpected) {
+        // TODO
         from.shouldHave(exactText(String.valueOf(fromExpected)));
         to.shouldHave(exactText(String.valueOf(toExpected)));
     }
 
+    // TODO Parameters should be 'int'
     public void checkLogs(String fromValue, String toValue) {
         logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("From", fromValue))).shouldBe(visible);
-        logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("To", toValue))).shouldBe(visible);
+        logCollection.findBy(text(LogRecordsFromTo.getRecord1("To", toValue))).shouldBe(visible);
     }
 
     public void checkTitle(){
-        assertEquals(getWebDriver().getTitle(), MAINDRIVERTITLE);
+        assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
     }
 
+    public void clickLeftMenuServiceItem(SubMenuItems item) {
+        subCollection.findBy(text(item.getRecord())).click();
+    }
 }
 
 
