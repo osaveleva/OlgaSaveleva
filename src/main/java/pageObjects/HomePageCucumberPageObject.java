@@ -27,7 +27,7 @@ public class HomePageCucumberPageObject {
     private Configuration cfg = ConfigFactory.create(Configuration.class);
 
     public HomePageCucumberPageObject() {
-        open(cfg.url());
+        //open(cfg.url());
         page(this);
     }
 
@@ -74,11 +74,6 @@ public class HomePageCucumberPageObject {
     public void checkTitle() {
         login(cfg.login(), cfg.password());
         assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
-    }
-
-    @When("I close browser")
-    public void workaroun() {
-        closeWebDriver();
     }
 
 }

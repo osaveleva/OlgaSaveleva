@@ -24,6 +24,6 @@ Feature: Different Elements Page Test
     When I unclick Wind checkbox
     Then Log for Water element with false status is displayed in log section
     Then Log for Wind element with false status is displayed in log section
-    When I close browser
+
 
 
