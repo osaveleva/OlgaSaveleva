@@ -53,7 +53,7 @@ public class HomePage extends TestBase {
         homePageObject.login(cfg.login(), cfg.password());
 
         //4. Assert User name in the left-top side of screen that user is loggined;
-        assertEquals(homePageObject.geTitle(), PAGE_TITLE);
+        assertEquals(homePageObject.geTitle(), USER_NAME);
 
         //5. Assert browser title
         assertEquals(driver.getTitle(), MAIN_DRIVER_TITLE);

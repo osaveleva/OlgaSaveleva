@@ -62,7 +62,7 @@ public class DatesSelenidePageObjectAllure {
     }
 
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGE_TITLE));
+        userName.shouldHave(text(USER_NAME));
     }
 
     private void clickServicetMenuItem(String str) {

@@ -2,15 +2,21 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import enums.*;
+import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.annotations.AfterClass;
+import utilities.Configuration;
 
 import java.util.List;
 
-import static base.HomePageValues.PAGE_TITLE;
+import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
@@ -18,30 +24,12 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
 
-public class ServiceCucumberPageObject {
+public class DifferentElementsCucumberPageObject {
+    private Configuration cfg = ConfigFactory.create(Configuration.class);
 
-    public ServiceCucumberPageObject() {
-        open("https://epam.github.io/JDI/");
+    public DifferentElementsCucumberPageObject() {
         page(this);
     }
-
-    @FindBy(css = ".profile-photo")
-    private SelenideElement profileButton;
-
-    @FindBy(css = "#name")
-    private SelenideElement nameField;
-
-    @FindBy(css = "#password")
-    private SelenideElement passwordField;
-
-    @FindBy(css = "#login-button")
-    private SelenideElement loginButton;
-
-    @FindBy(css = "#user-name")
-    private SelenideElement userName;
-
-    @FindBy(css = ".sidebar-menu > li")
-    public ElementsCollection menuCollection;
 
     @FindBy(css = ".colors > select > option")
     private ElementsCollection dropdonwItemCollection;
@@ -88,22 +76,9 @@ public class ServiceCucumberPageObject {
     @FindBy(css = ".panel-body-list.logs > li")
     private ElementsCollection radioLogRecords;
 
-
-    @When("I login as user (.+) with password (.+)")
-    public void login(String name, String password) {
-        profileButton.click();
-        nameField.sendKeys(name);
-        passwordField.sendKeys(password);
-        loginButton.click();
-    }
-
-    @When("I click Different Elements menu item")
+    @And("I click Different Elements submenu item")
     public void clickDiffElementMenuItem() {
         subCollection.findBy(text(SubMenuItems.DIFFERENT_ELEMENTS.getRecord())).click();
-    }
-
-    private void clickServicetMenuItem(String str) {
-        menuCollection.findBy(text(str)).click();
     }
 
     @When("I click (.+) checkbox")
@@ -124,19 +99,6 @@ public class ServiceCucumberPageObject {
         radioButtonRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
     }
 
-    @Then("Name for loggined user is displayed")
-    public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGE_TITLE));
-    }
-
-    @When("I click Service menu item")
-    public void checkServiceMenu() {
-        clickServicetMenuItem(LeftMenuItems.SERVICE.getRecord());
-        for (SubMenuItems sm : SubMenuItems.values()) {
-            subCollection.findBy(text(sm.getRecord())).should(exist);
-        }
-    }
-
     @When("I click (.+) color from dropdown menu")
     public void clickDropDown(String itemValue) {
         dropdown.click();
@@ -149,22 +111,22 @@ public class ServiceCucumberPageObject {
     }
 
     @Then("Four checkboxes are displayed")
-    public void checkCheckBoxCollection() {
+    public void checkNatureCheckBox() {
         checkboxCollection.shouldHaveSize(ElementsCheckBox.values().length);
     }
 
     @Then("Four radiobuttons are displayed")
-    public void checkRadioButtonCollection() {
+    public void checkMetalsRadioButton() {
         radioButtonCollection.shouldHaveSize(MetalsRadioButton.values().length);
     }
 
     @Then("One dropdown list is displayed")
-    public void checkDropDownCollection() {
+    public void checkDropDown() {
         dropdownCollection.shouldHaveSize(Integer.valueOf(ElementsNumber.DROPDOWN_NUMBER.getRecord()));
     }
 
     @Then("Two buttons are displayed")
-    public void checkButtonCollection() {
+    public void checkButtons() {
         buttonCollection.shouldHaveSize(DiffElementButtons.values().length);
     }
 
@@ -178,32 +140,24 @@ public class ServiceCucumberPageObject {
         leftSection.shouldBe(visible);
     }
 
-    @Then("Logs for checked checkboxes are displayed in log section")
-    public void checkTrueCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
+    @Then("Log for (.+) element with (.+) status is displayed in log section")
+    public void checkNatureCheckBoxLogRecords(String element, String status) {
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord(element, status))).shouldBe(visible);
     }
 
-    @Then("Log for select radiobutton is displayed in log section")
-    public void checkRadioButtonLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
+    @Then("Log for (.+) radiobutton is displayed in log section")
+    public void checkRadioButtonLogRecords(String metail) {
+        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.getRecord(metail))).shouldBe(visible);
     }
 
-    @Then("Log for dropdown list is displayed in log section")
-    public void checkDropDownLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsDropDown.TEMPLATE.getRecord("Yellow"))).shouldBe(visible);
+    @Then("Log for (.+) color in dropdown list is displayed in log section")
+    public void checkDropDownLogRecords(String color) {
+        checkboxLogRecords.findBy(text(LogRecordsDropDown.getRecord(color))).shouldBe(visible);
     }
 
-    @Then("Logs for unclicked checkboxes are displayed")
-    public void checkFalseCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "false"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "false"))).shouldBe(visible);
+    @AfterClass
+    public void afterClass() {
+        WebDriverRunner.getWebDriver().close();
     }
-
-    @Given("I'm on the Home Page")
-    public void checkTitle() {
-//        assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
-    }
-
 }
 

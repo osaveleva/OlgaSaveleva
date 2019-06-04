@@ -44,7 +44,7 @@ public class DatesPageSelenide extends TestBaseSelenide {
 
         //5. Open through the header menu Service -> Different Elements Page
         datePage.clickLeftMenuServiceItem(SubMenuItems.DATES);
-//        datePage.clickDiffElementMenuItem();
+//        datePage.clickSubMenuItem();
 
         //6. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most rigth position 0 100
         datePage.moveSlider(0, 100);

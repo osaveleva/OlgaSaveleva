@@ -1,12 +1,12 @@
 package enums;
 
-public enum LogRecordsRadioButton {
+public enum LogRecordsMetalsRadioButton {
 
     TEMPALTE("metal: value changed to %s");
 
     private String record;
 
-    LogRecordsRadioButton(String record) {
+    LogRecordsMetalsRadioButton(String record) {
         this.record = record;
     }
 

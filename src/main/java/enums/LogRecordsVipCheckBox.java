@@ -1,12 +1,12 @@
 package enums;
 
-public enum LogRecordsDropDown {
+public enum LogRecordsVipCheckBox {
 
-    TEMPLATE("Colors: value changed to %s");
+    TEMPLATE("Vip: condition changed to %s");
 
     private String record;
 
-    LogRecordsDropDown(String record) {
+    LogRecordsVipCheckBox(String record) {
         this.record = record;
     }
 

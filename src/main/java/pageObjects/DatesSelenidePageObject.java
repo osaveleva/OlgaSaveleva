@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static base.HomePageValues.*;
-import static enums.LeftMenuItems.*;
 import static org.testng.Assert.assertEquals;
 
 
@@ -57,12 +56,12 @@ public class DatesSelenidePageObject {
         loginButton.click();
     }
 
-//    public void clickDiffElementMenuItem() {
+//    public void clickSubMenuItem() {
 //        subCollection.findBy(text(SubMenuItems.DATES.getRecord())).click();
 //    }
 
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGE_TITLE));
+        userName.shouldHave(text(USER_NAME));
     }
 
     // TODO

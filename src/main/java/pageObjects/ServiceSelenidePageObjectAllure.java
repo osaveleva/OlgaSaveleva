@@ -108,7 +108,7 @@ public class ServiceSelenidePageObjectAllure {
 
     @Step
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGE_TITLE));
+        userName.shouldHave(text(USER_NAME));
     }
 
     @Step
@@ -162,13 +162,13 @@ public class ServiceSelenidePageObjectAllure {
 
     @Step
     public void checkCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
     }
 
     @Step
     public void checkRadioButtonLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
     }
 
     @Step

@@ -1,11 +1,11 @@
 package enums;
 
-public enum LogRecordsCheckBox {
+public enum LogRecordsElementsCheckBox {
 
     TEMPLATE("%s: condition changed to %s");
     private String record;
 
-    LogRecordsCheckBox(String record) {
+    LogRecordsElementsCheckBox(String record) {
         this.record = record;
     }
 

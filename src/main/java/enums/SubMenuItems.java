@@ -7,7 +7,8 @@ public enum SubMenuItems {
     COMPLEX_TABLE("Complex Table"),
     SIMPLE_TABLE("Simple Table"),
     PAGES_TABLE("Table with pages"),
-    DIFFERENT_ELEMENTS("Different elements");
+    DIFFERENT_ELEMENTS("Different elements"),
+    USER_TABLE("User Table");
 
     private String record;
 

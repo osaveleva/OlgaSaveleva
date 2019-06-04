@@ -108,7 +108,7 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkUserNameTitle() {
-        userName.shouldHave(text(PAGE_TITLE));
+        userName.shouldHave(text(USER_NAME));
     }
 
     public void checkServiceMenu() {
@@ -152,12 +152,12 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkTrueCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
     }
 
     public void checkRadioButtonLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
     }
 
     public void checkDropDownLogRecords() {
@@ -165,8 +165,8 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkFalseCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Water", "false"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsCheckBox.TEMPLATE.getRecord("Wind", "false"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Water", "false"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Wind", "false"))).shouldBe(visible);
     }
 
     public void checkTitle(){

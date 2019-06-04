@@ -1,6 +1,6 @@
-Feature: Service Page Test
+Feature: Different Elements Page Test
 
-  Scenario: Service Page Interface Test
+  Scenario: Different Elements Interface Test
     Given I'm on the Home Page
     And I login as user 'Piter Chailovskii'
     When I click on 'Service' button in Header

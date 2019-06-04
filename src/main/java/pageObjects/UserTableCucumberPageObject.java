@@ -1,178 +1,142 @@
 package pageObjects;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
+import com.codeborne.selenide.impl.WebElementsCollection;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import enums.*;
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.annotations.AfterClass;
 import utilities.Configuration;
 
-import java.util.List;
 
 import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static org.testng.Assert.assertEquals;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 
-public class DifferentElementsCucumberPageObject{
+public class UserTableCucumberPageObject {
     private Configuration cfg = ConfigFactory.create(Configuration.class);
 
-    public DifferentElementsCucumberPageObject() {
-        open(cfg.url());
+    public UserTableCucumberPageObject() {
         page(this);
     }
 
-    @FindBy(css = ".colors > select > option")
-    private ElementsCollection dropdonwItemCollection;
-
-    @FindBy(css = ".colors")
-    public SelenideElement dropdown;
+    @FindBy(css = "tr input[type ='checkbox']")
+    private ElementsCollection checkBoxCollection;
 
     @FindBy(css = ".sub > li")
     private ElementsCollection subCollection;
 
-    @FindBy(css = ".label-checkbox")
-    private ElementsCollection checkboxCollection;
+    @FindBy(css = ".support-title")
+    private SelenideElement userPageHeader;
 
-    @FindBy(css = ".label-radio")
-    private ElementsCollection radioButtonCollection;
+    @FindBy(css = "tr select")
+    private ElementsCollection dropdownList;
 
-    @FindBy(css = ".colors")
-    private ElementsCollection dropdownCollection;
+    @FindBy(css = "tr a")
+    private ElementsCollection userNameList;
 
-    @FindBy(css = ".main-content .uui-button")
-    private ElementsCollection buttonCollection;
+    @FindBy(css = "tr img")
+    private ElementsCollection imgList;
 
-    @FindBy(css = ".label-checkbox input[type ='checkbox']")
-    public List<SelenideElement> checkboxValueCollection;
+    @FindBy(css = "#user-table")
+    private SelenideElement table;
 
-    @FindBy(css = ".label-checkbox")
-    private ElementsCollection checkboxRow;
+    @FindBy(css = "tr div span")
+    private ElementsCollection subText;
 
-    @FindBy(css = ".label-radio")
-    private ElementsCollection radioButtonRow;
+    @FindBy(css = "#ivan")
+    private SelenideElement ivanCheckBox;
 
-    @FindBy(css = ".label-radio input[type ='radio']")
-    private List<SelenideElement> radioButtonValueCollection;
+    @FindBy(css = ".panel-body-list > li")
+    private ElementsCollection logCollection;
 
-    @FindBy(css = "div[name='log-sidebar']")
-    private SelenideElement rightSection;
-
-    @FindBy(css = "div[name='navigation-sidebar']")
-    private SelenideElement leftSection;
-
-    @FindBy(css = ".panel-body-list.logs > li")
-    private ElementsCollection checkboxLogRecords;
-
-    @FindBy(css = ".panel-body-list.logs > li")
-    private ElementsCollection radioLogRecords;
+    @FindBy(css = "select > option")
+    private ElementsCollection dropdownValues;
 
 
+    @And("I select 'vip' checkbox for 'Sergey Ivan'")
+    public void checkIvanCheckbox() {
+        ivanCheckBox.click();
+        ivanCheckBox.shouldBe(checked);
+    }
 
-    @When("I click Different Elements menu item")
+    @Then("1 log row has 'Vip: condition changed to (.+)' text in log section'")
+    public void checkVipCheckboxLogs(String value) {
+        logCollection.findBy(text(LogRecordsVipCheckBox.getRecord("true"))).shouldBe(visible);
+    }
+
+    @And("(\\d+) checkboxes are displayed on Users Table on User Table Page")
+    public void getCheckBoxNumber(int size) {
+        subText.shouldHaveSize(size);
+    }
+
+    @And("User table contains following values: (.+), (.*), (.*)")
+    public void checkTable(String num, String name, String description) {
+        table
+                .find(byText(name)).should(visible)
+                .closest("tr")
+                .find(byText(description)).should(visible)
+                .closest("tr")
+                .find(byText(num)).should(visible);
+    }
+
+    @When("I click on dropdown in column Type for user (.+)")
+    public void clickRomanDropDown(String name) {
+        table
+                .find(byText(name)).should(visible)
+                .closest("tr")
+                .findElement(By.tagName("select")).click();
+
+    }
+
+    @Then("droplist contains values (.+)")
+    public void checkDropDownListValues(String value) {
+        dropdownValues.findBy(text(value)).shouldBe(visible);
+    }
+
+
+    @And("(\\d+) Description texts under images are displayed on Users Table on User Table Page")
+    public void getSubTextNumber(int size) {
+        subText.shouldHaveSize(size);
+    }
+
+    @And("(\\d+) User names are displayed on Users Table on User Table Page")
+    public void getUserNameNumber(int size) {
+        userNameList.shouldHaveSize(size);
+    }
+
+    @And("(\\d+) Description images are displayed on Users Table on User Table Page")
+    public void getImgNumber(int size) {
+        imgList.shouldHaveSize(size);
+    }
+
+    @And("(\\d+) NumberType Dropdowns are displayed on Users Table on User Table Page")
+    public void getDropDownNumber(int size) {
+        dropdownList.shouldHaveSize(size);
+    }
+
+    @Then("'User Table' page is opened")
+    public void checkUserPAfeTitle() {
+        userPageHeader.shouldHave(text(USER_PAGE_TITLE));
+
+    }
+
+    @And("I click on User Table button in Service dropdown")
     public void clickDiffElementMenuItem() {
-        subCollection.findBy(text(SubMenuItems.DIFFERENT_ELEMENTS.getRecord())).click();
+        subCollection.findBy(text(SubMenuItems.USER_TABLE.getRecord())).click();
     }
 
-
-    @When("I click (.+) checkbox")
-    public void checkCheckBox(String itemValue) {
-        checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
-        checkboxRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
+    @AfterClass
+    public void afterClass() {
+        WebDriverRunner.getWebDriver().close();
     }
-
-    @When("I unclick (.+) checkbox")
-    public void checkUnCheckBox(String itemValue) {
-        checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
-        checkboxRow.findBy(text(itemValue)).lastChild().shouldNotBe(checked);
-    }
-
-    @When("I click radiobutton (.+)")
-    public void checkRadioButton(String itemValue) {
-        radioButtonRow.findBy(text(itemValue)).shouldBe(enabled).click();
-        radioButtonRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
-    }
-
-    //@Then("Name for loggined user is displayed")
-    //public void checkUserNameTitle() {
-    //    userName.shouldHave(text(USER_NAME));
-    //}
-//
-    //@When("I click Service menu item")
-    //public void checkServiceMenu() {
-    //    clickServicetMenuItem(LeftMenuItems.SERVICE.getRecord());
-    //    for (SubMenuItems sm : SubMenuItems.values()) {
-    //        subCollection.findBy(text(sm.getRecord())).should(exist);
-    //    }
-    //}
-
-    @When("I click (.+) color from dropdown menu")
-    public void clickDropDown(String itemValue) {
-        dropdown.click();
-        dropdonwItemCollection.findBy(text(itemValue)).shouldBe(enabled).click();
-    }
-
-    @When("(.+) color is selected in dropdown list")
-    public void checkDropDown(String itemValue) {
-        dropdonwItemCollection.findBy(text(itemValue)).shouldBe(selected);
-    }
-
-    @Then("Four checkboxes are displayed")
-    public void checkNatureCheckBox() {
-        checkboxCollection.shouldHaveSize(ElementsCheckBox.values().length);
-    }
-
-    @Then("Four radiobuttons are displayed")
-    public void checkMetalsRadioButton() {
-        radioButtonCollection.shouldHaveSize(MetalsRadioButton.values().length);
-    }
-
-    @Then("One dropdown list is displayed")
-    public void checkDropDown() {
-        dropdownCollection.shouldHaveSize(Integer.valueOf(ElementsNumber.DROPDOWN_NUMBER.getRecord()));
-    }
-
-    @Then("Two buttons are displayed")
-    public void checkButtons() {
-        buttonCollection.shouldHaveSize(DiffElementButtons.values().length);
-    }
-
-    @Then("Right section is displayed")
-    public void checkRightSection() {
-        rightSection.shouldBe(visible);
-    }
-
-    @Then("Left section is displayed")
-    public void checkLeftSection() {
-        leftSection.shouldBe(visible);
-    }
-
-    @Then("Log for (.+) element with (.+) status is displayed in log section")
-    public void checkNatureCheckBoxLogRecords(String element, String status) {
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord(element, status))).shouldBe(visible);
-    }
-
-    @Then("Log for (.+) radiobutton is displayed in log section")
-    public void checkRadioButtonLogRecords(String metail) {
-        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.getRecord(metail))).shouldBe(visible);
-    }
-
-    @Then("Log for (.+) color in dropdown list is displayed in log section")
-    public void checkDropDownLogRecords(String color) {
-        checkboxLogRecords.findBy(text(LogRecordsDropDown.getRecord(color))).shouldBe(visible);
-    }
-
-    @Given("I'm on the Home Page")
-    public void checkTitle() {
-        assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
-    }
-
 }
 
