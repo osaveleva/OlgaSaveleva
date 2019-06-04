@@ -1,25 +1,23 @@
 package pageObjects;
 
 import com.codeborne.selenide.*;
-import com.codeborne.selenide.impl.WebElementsCollection;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import enums.*;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.annotations.AfterClass;
 import utilities.Configuration;
 
+
+import java.util.List;
 
 import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 
 public class UserTableCucumberPageObject {
@@ -132,6 +130,27 @@ public class UserTableCucumberPageObject {
     @And("I click on User Table button in Service dropdown")
     public void clickDiffElementMenuItem() {
         subCollection.findBy(text(SubMenuItems.USER_TABLE.getRecord())).click();
+    }
+
+    
+    enum SuperHero {
+        ROMAN(1, "Roman", "Wolverine");
+
+        private final int number;
+        private final String name;
+        private final String superHeroName;
+
+        SuperHero(int number, String name, String superHeroName) {
+            this.number = number;
+            this.name = name;
+            this.superHeroName = superHeroName;
+        }
+    }
+    
+    @And("^User table contains following values:$")
+    public void userTableContainsFollowingValues(List<SuperHero> superHeroList) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 }
 
