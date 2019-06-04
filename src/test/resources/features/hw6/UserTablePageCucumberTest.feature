@@ -13,6 +13,7 @@ Feature: User Table Page Test
     And 6 checkboxes are displayed on Users Table on User Table Page
     And User table contains following values: 1, Roman, Wolverine
     And User table contains following values: 2, Sergey Ivan, Spider Man
+    And User table contains following values: 3, Vladzimir, Punisher
     When I select 'vip' checkbox for 'Sergey Ivan'
     Then 1 log row has 'Vip: condition changed to (.+)' text in log section'
     When I click on dropdown in column Type for user Roman
