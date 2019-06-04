@@ -19,6 +19,7 @@ import static base.HomePageValues.USER_NAME;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
@@ -73,6 +74,11 @@ public class HomePageCucumberPageObject {
     public void checkTitle() {
         login(cfg.login(), cfg.password());
         assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
+    }
+
+    @When("I close browser")
+    public void workaroun() {
+        closeWebDriver();
     }
 
 }

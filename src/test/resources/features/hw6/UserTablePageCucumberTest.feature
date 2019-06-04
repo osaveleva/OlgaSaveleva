@@ -19,8 +19,7 @@ Feature: User Table Page Test
     Then droplist contains values Admin
     Then droplist contains values User
     Then droplist contains values Manager
-
-
+    When I close browser
 
 
 

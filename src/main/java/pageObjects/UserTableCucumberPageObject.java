@@ -19,6 +19,7 @@ import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 
 public class UserTableCucumberPageObject {
@@ -102,7 +103,6 @@ public class UserTableCucumberPageObject {
         dropdownValues.findBy(text(value)).shouldBe(visible);
     }
 
-
     @And("(\\d+) Description texts under images are displayed on Users Table on User Table Page")
     public void getSubTextNumber(int size) {
         subText.shouldHaveSize(size);
@@ -132,11 +132,6 @@ public class UserTableCucumberPageObject {
     @And("I click on User Table button in Service dropdown")
     public void clickDiffElementMenuItem() {
         subCollection.findBy(text(SubMenuItems.USER_TABLE.getRecord())).click();
-    }
-
-    @AfterClass
-    public void afterClass() {
-        WebDriverRunner.getWebDriver().close();
     }
 }
 

@@ -152,21 +152,21 @@ public class ServiceSelenidePageObject {
     }
 
     public void checkTrueCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Water", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Wind", "true"))).shouldBe(visible);
     }
 
     public void checkRadioButtonLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.getRecord("Selen"))).shouldBe(visible);
     }
 
     public void checkDropDownLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsDropDown.TEMPLATE.getRecord("Yellow"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsDropDown.getRecord("Yellow"))).shouldBe(visible);
     }
 
     public void checkFalseCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Water", "false"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Wind", "false"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Water", "false"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Wind", "false"))).shouldBe(visible);
     }
 
     public void checkTitle(){

@@ -154,10 +154,5 @@ public class DifferentElementsCucumberPageObject {
     public void checkDropDownLogRecords(String color) {
         checkboxLogRecords.findBy(text(LogRecordsDropDown.getRecord(color))).shouldBe(visible);
     }
-
-    @AfterClass
-    public void afterClass() {
-        WebDriverRunner.getWebDriver().close();
-    }
 }
 

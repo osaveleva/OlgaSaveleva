@@ -162,18 +162,18 @@ public class ServiceSelenidePageObjectAllure {
 
     @Step
     public void checkCheckBoxLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Water", "true"))).shouldBe(visible);
-        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.TEMPLATE.getRecord("Wind", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Water", "true"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Wind", "true"))).shouldBe(visible);
     }
 
     @Step
     public void checkRadioButtonLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.TEMPALTE.getRecord("Selen"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsMetalsRadioButton.getRecord("Selen"))).shouldBe(visible);
     }
 
     @Step
     public void checkDropDownLogRecords() {
-        checkboxLogRecords.findBy(text(LogRecordsDropDown.TEMPLATE.getRecord("Yellow"))).shouldBe(visible);
+        checkboxLogRecords.findBy(text(LogRecordsDropDown.getRecord("Yellow"))).shouldBe(visible);
     }
 }
 
