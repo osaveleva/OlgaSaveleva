@@ -2,6 +2,7 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -60,8 +61,28 @@ public class HomePageCucumberPageObject {
         loginButton.click();
     }
 
+    @And("^I login as user \"([^\"]*)\"$")
+    public void iLoginAsUser(Users user) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    enum Users {
+        PETER("epam", "name", "1234");
+
+        private final String login;
+        private final String name;
+        private final String passowrd;
+
+        Users(String login, String name, String passowrd) {
+            this.login = login;
+            this.name = name;
+            this.passowrd = passowrd;
+        }
+    }
+
     @And("I login as user 'Piter Chailovskii'")
-    public void checkUserNameTitle() {
+    public void checkUserNameTitle(Users user) {
         userName.shouldHave(text(USER_NAME));
     }
 
