@@ -9,8 +9,8 @@ public enum LogRecordsCheckBox {
         this.record = record;
     }
 
-    public String getRecord(String element, String status) {
-        return String.format(record, element, status);
+    public static String getRecord(String element, String status) {
+        return String.format(TEMPLATE.record, element, status);
     }
 
 

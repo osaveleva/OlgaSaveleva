@@ -5,6 +5,7 @@ import enums.LeftMenuItems;
 import enums.SubTextValues;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import static base.HomePageValues.*;
 
@@ -69,14 +70,12 @@ public class HomePageObject {
         nameField.sendKeys(name);
         passwordField.sendKeys(password);
         loginButton.click();
-
     }
 
     public String geTitle() {
         return userName.getText();
     }
 
-    // TODO
     private List<String> makeListCollection(List<WebElement> collection) {
         return collection.stream()
                 .map(WebElement::getText)
@@ -85,12 +84,16 @@ public class HomePageObject {
 
     public void checkLeftMenu() {
         assertEquals(sidebarItems.size(), LeftMenuItems.values().length);
-        for (LeftMenuItems st : LeftMenuItems.values()) {
-            assertTrue(makeListCollection(sidebarItems).contains(st.getRecord()));
+        List<String> leftMenuItems = makeListCollection(sidebarItems);
+        for (LeftMenuItems item : LeftMenuItems.values()) {
+            assertTrue(leftMenuItems.contains(item.getRecord()));
         }
-        for (WebElement ele : sidebarItems) {
-            assertTrue(ele.isDisplayed());
-        }
+        // TODO
+        Assert.assertTrue(sidebarItems.stream()
+                .allMatch(WebElement::isDisplayed));
+//        for (WebElement elem : sidebarItems) {
+//            assertTrue(elem.isDisplayed());
+//        }
     }
 
     public void checkSubText() {
@@ -140,9 +143,6 @@ public class HomePageObject {
     }
 
     public void checkSubHeaderLink() {
-        assertEquals(subheader.getAttribute("href"), HREF);
+        assertEquals(subheader.getAttribute("href"), JDI_GITHUB_LINK);
     }
-
-
 }
-

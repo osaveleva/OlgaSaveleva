@@ -43,25 +43,22 @@ public class HomePage extends TestBase {
 
     @Test
     public void checkHomePage() {
-
-
         //1. Open test site by URL
         driver.navigate().to(cfg.url());
 
         //2. Assert browser title
-        assertEquals(driver.getTitle(), MAINDRIVERTITLE);
+        assertEquals(driver.getTitle(), MAIN_DRIVER_TITLE);
 
         //3. Perform login
         homePageObject.login(cfg.login(), cfg.password());
 
         //4. Assert User name in the left-top side of screen that user is loggined;
-        assertEquals(homePageObject.geTitle(), PAGETITLE);
+        assertEquals(homePageObject.geTitle(), PAGE_TITLE);
 
         //5. Assert browser title
-        assertEquals(driver.getTitle(), MAINDRIVERTITLE);
+        assertEquals(driver.getTitle(), MAIN_DRIVER_TITLE);
 
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        // TODO
         homePageObject.checkLeftMenu();
 
         //7. Assert that there are 4 images on the Index Page and they are displayed

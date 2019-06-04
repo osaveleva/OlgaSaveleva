@@ -2,10 +2,9 @@ Feature: Service Page Test
 
   Scenario: Service Page Interface Test
     Given I'm on the Home Page
-    When I login as user epam with password 1234
-    Then Name for loggined user is displayed
-    When I click Service menu item
-    When I click Different Elements menu item
+    And I login as user 'Piter Chailovskii'
+    When I click on 'Service' button in Header
+    When I click Different Elements submenu item
     Then Four checkboxes are displayed
     Then Four radiobuttons are displayed
     Then One dropdown list is displayed
@@ -14,14 +13,16 @@ Feature: Service Page Test
     Then Right section is displayed
     When I click Water checkbox
     When I click Wind checkbox
-    Then Logs for checked checkboxes are displayed in log section
+    Then Log for Water element with true status is displayed in log section
+    Then Log for Wind element with true status is displayed in log section
     When I click radiobutton Selen
-    Then Log for select radiobutton is displayed in log section
+    Then Log for Selen radiobutton is displayed in log section
     When I click Yellow color from dropdown menu
     Then Yellow color is selected in dropdown list
-    Then Log for dropdown list is displayed in log section
+    Then Log for Yellow color in dropdown list is displayed in log section
     When I unclick Water checkbox
     When I unclick Wind checkbox
-    Then Logs for unclicked checkboxes are displayed
+    Then Log for Water element with false status is displayed in log section
+    Then Log for Wind element with false status is displayed in log section
 
 

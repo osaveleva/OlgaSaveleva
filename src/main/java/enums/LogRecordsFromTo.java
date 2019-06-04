@@ -13,4 +13,8 @@ public enum LogRecordsFromTo {
     public String getRecord(String ToFrom, String value) {
         return String.format(record, ToFrom, value);
     }
+    // TODO
+    public static String getRecord1(String ToFrom, String value) {
+        return String.format(TEMPLATE.record, ToFrom, value);
+    }
 }

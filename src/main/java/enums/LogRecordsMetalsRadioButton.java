@@ -10,8 +10,8 @@ public enum LogRecordsRadioButton {
         this.record = record;
     }
 
-    public String getRecord(String element) {
-        return String.format(record, element);
+    public static String getRecord(String element) {
+        return String.format(TEMPALTE.record, element);
     }
 
 

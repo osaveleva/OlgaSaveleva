@@ -1,16 +1,17 @@
 package hw4;
 
 import base.TestBaseSelenide;
+import enums.SubMenuItems;
 import org.aeonbits.owner.ConfigFactory;
 import utilities.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.DatesSelenidePageObject;
 
-import static base.HomePageValues.*;
+import java.util.Arrays;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static enums.LeftMenuItems.SERVICE;
 import static org.testng.Assert.assertEquals;
 
 
@@ -22,14 +23,12 @@ public class DatesPageSelenide extends TestBaseSelenide {
 
     @BeforeClass
     public void beforeClass() {
-
         cfg = ConfigFactory.create(Configuration.class);
         datePage = open(cfg.url(), DatesSelenidePageObject.class);
     }
 
     @Test
     public void checkServicePage() {
-
         //1. Assert Browser title
         datePage.checkTitle();
 
@@ -40,13 +39,16 @@ public class DatesPageSelenide extends TestBaseSelenide {
         datePage.checkUserNameTitle();
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
+        datePage.clickLeftMenuBaseItem(SERVICE);
         datePage.checkServiceMenu();
 
         //5. Open through the header menu Service -> Different Elements Page
-        datePage.clickDiffElementMenuItem();
+        datePage.clickLeftMenuServiceItem(SubMenuItems.DATES);
+//        datePage.clickDiffElementMenuItem();
 
         //6. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most rigth position 0 100
         datePage.moveSlider(0, 100);
+        datePage.checkSliderPosition(0, 100);
 
         //7. Assert that for "From" and "To" sliders there are logs rows with corresponding values
         datePage.checkLogs("0", "100");
