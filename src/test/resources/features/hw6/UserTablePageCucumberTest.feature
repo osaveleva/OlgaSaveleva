@@ -5,6 +5,7 @@ Feature: User Table Page Test
     And I login as user 'Piter Chailovskii'
     When I click on 'Service' button in Header
     And I click on User Table button in Service dropdown
+    # TODO Should be parametrised
     Then 'User Table' page is opened
     And 6 NumberType Dropdowns are displayed on Users Table on User Table Page
     And 6 User names are displayed on Users Table on User Table Page
@@ -13,7 +14,13 @@ Feature: User Table Page Test
     And 6 checkboxes are displayed on Users Table on User Table Page
     And User table contains following values: 1, Roman, Wolverine
     And User table contains following values: 2, Sergey Ivan, Spider Man
-    And User table contains following values: 3, Vladzimir, Punisher
+
+    And User table contains following values:
+    | Number | Name  | SuperHeroName |
+    | 1      | Roman | Wolverine     |
+    | 2      | Dima  | TA            |
+
+    # TODO Should be parametrised
     When I select 'vip' checkbox for 'Sergey Ivan'
     Then 1 log row has 'Vip: condition changed to (.+)' text in log section'
     When I click on dropdown in column Type for user Roman

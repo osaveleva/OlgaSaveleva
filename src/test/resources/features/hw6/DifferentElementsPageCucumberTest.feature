@@ -2,17 +2,25 @@ Feature: Different Elements Page Test
 
   Scenario: Different Elements Interface Test
     Given I'm on the Home Page
-    And I login as user 'Piter Chailovskii'
+    # TODO This step should be parametrised by User
+    And I login as user "PETER"
+    # TODO Parameter required
     When I click on 'Service' button in Header
     When I click Different Elements submenu item
+    # !TODO
     Then Four checkboxes are displayed
     Then Four radiobuttons are displayed
     Then One dropdown list is displayed
     Then Two buttons are displayed
     Then Left section is displayed
     Then Right section is displayed
+    # TODO Should be List<Enum>
+    # When I select nature elements below:
+    #  | WATER |
+    #  | WIND  |
     When I click Water checkbox
     When I click Wind checkbox
+    # !TODO
     Then Log for Water element with true status is displayed in log section
     Then Log for Wind element with true status is displayed in log section
     When I click radiobutton Selen
