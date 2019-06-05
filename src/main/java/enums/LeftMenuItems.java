@@ -7,7 +7,9 @@ public enum LeftMenuItems {
     CONTACT_FORM("Contact form"),
     HOME("Home"),
     METALS_COLORS("Metals & Colors"),
-    ELEMENTS_PACK("Elements packs");
+    ELEMENTS_PACK("Elements packs"),
+    DIFFERENT_ELEMENTS("Different elements"),
+    DATES("Dates");
 
     private String record;
 
@@ -18,6 +20,5 @@ public enum LeftMenuItems {
     public String getRecord() {
         return record;
     }
-
 
 }

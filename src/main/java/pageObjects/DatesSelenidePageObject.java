@@ -75,6 +75,19 @@ public class DatesSelenidePageObject {
         }
     }
 
+    public void clickMenu(LeftMenuItems... v) {
+        if (v.length == 1) {
+            menuCollection.findBy(text(v[0].getRecord())).click();
+        } else {
+            if (subCollection.findBy(text(v[1].getRecord())).isDisplayed()) {
+                subCollection.findBy(text(v[1].getRecord())).click();
+            } else {
+                menuCollection.findBy(text(v[0].getRecord())).click();
+                subCollection.findBy(text(v[1].getRecord())).click();
+            }
+        }
+    }
+
     public void moveSlider(int fromExpected, int toExpected) {
         String offsetWidth = slider.getAttribute("offsetWidth");
         double step = Double.valueOf(offsetWidth) / 100.0;
@@ -103,7 +116,7 @@ public class DatesSelenidePageObject {
         logCollection.findBy(text(LogRecordsFromTo.getRecord1("To", toValue))).shouldBe(visible);
     }
 
-    public void checkTitle(){
+    public void checkTitle() {
         assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
     }
 

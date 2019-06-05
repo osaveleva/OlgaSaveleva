@@ -11,6 +11,7 @@ import pageObjects.DatesSelenidePageObject;
 import java.util.Arrays;
 
 import static com.codeborne.selenide.Selenide.*;
+import static enums.LeftMenuItems.DATES;
 import static enums.LeftMenuItems.SERVICE;
 import static org.testng.Assert.assertEquals;
 
@@ -28,7 +29,7 @@ public class DatesPageSelenide extends TestBaseSelenide {
     }
 
     @Test
-    public void checkServicePage() {
+    public void checkDatesPage() {
         //1. Assert Browser title
         datePage.checkTitle();
 
@@ -39,11 +40,12 @@ public class DatesPageSelenide extends TestBaseSelenide {
         datePage.checkUserNameTitle();
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
-        datePage.clickLeftMenuBaseItem(SERVICE);
+        datePage.clickMenu(SERVICE);
         datePage.checkServiceMenu();
 
         //5. Open through the header menu Service -> Different Elements Page
-        datePage.clickLeftMenuServiceItem(SubMenuItems.DATES);
+        datePage.clickMenu(SERVICE, DATES);
+        //datePage.clickLeftMenuServiceItem(SubMenuItems.DATES);
 //        datePage.clickSubMenuItem();
 
         //6. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most rigth position 0 100

@@ -11,7 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import pageObjects.ServiceSelenidePageObjectAllureFail;
+import pageObjects.DifferentElementsSelenidePageObjectAllureFail;
 import utilities.Configuration;
 
 import static base.HomePageValues.*;
@@ -26,13 +26,13 @@ import static org.testng.Assert.assertEquals;
 public class ServicePageSelenideAllureFail extends TestBaseSelenide {
 
     private Configuration cfg;
-    private ServiceSelenidePageObjectAllureFail servicePage;
+    private DifferentElementsSelenidePageObjectAllureFail servicePage;
 
     @BeforeClass
     public void beforeClass() {
 
         cfg = ConfigFactory.create(Configuration.class);
-        servicePage = open(cfg.url(), ServiceSelenidePageObjectAllureFail.class);
+        servicePage = open(cfg.url(), DifferentElementsSelenidePageObjectAllureFail.class);
     }
 
     @AfterClass

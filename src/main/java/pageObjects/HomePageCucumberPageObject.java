@@ -2,25 +2,20 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import enums.Credentials;
 import enums.LeftMenuItems;
-import enums.SubMenuItems;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import utilities.Configuration;
 
-import static base.HomePageValues.MAIN_DRIVER_TITLE;
-import static base.HomePageValues.USER_NAME;
+import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
@@ -53,47 +48,29 @@ public class HomePageCucumberPageObject {
     @FindBy(css = ".sub > li")
     private ElementsCollection subCollection;
 
-    @When("I login as user (.+) with password (.+)")
-    public void login(String name, String password) {
+    @And("Login as {peter}")
+    public void i_supply_enum_value(Credentials credentials) {
         profileButton.click();
-        nameField.sendKeys(name);
-        passwordField.sendKeys(password);
+        nameField.sendKeys(credentials.getLogin());
+        passwordField.sendKeys(credentials.getPassword());
         loginButton.click();
-    }
-
-    @And("^I login as user \"([^\"]*)\"$")
-    public void iLoginAsUser(Users user) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    enum Users {
-        PETER("epam", "name", "1234");
-
-        private final String login;
-        private final String name;
-        private final String passowrd;
-
-        Users(String login, String name, String passowrd) {
-            this.login = login;
-            this.name = name;
-            this.passowrd = passowrd;
-        }
-    }
-
-    @And("I login as user 'Piter Chailovskii'")
-    public void checkUserNameTitle(Users user) {
         userName.shouldHave(text(USER_NAME));
     }
 
-    @When("I click on 'Service' button in Header")
-    public void clickServicetMenuItem() {
-        menuCollection.findBy(text(LeftMenuItems.SERVICE.getRecord())).click();
+    @When("I click on {menu} button in submenu")
+    public void clickServicetMenuItem(LeftMenuItems value) {
+        subCollection.findBy(text(value.getRecord())).click();
     }
+
+    @When("I click on {menu} button in Header")
+    public void clickMenu(LeftMenuItems v) {
+        System.out.println(v.getRecord());
+        menuCollection.findBy(text(v.getRecord())).click();
+    }
+
 
     @Given("I'm on the Home Page")
     public void checkTitle() {
-        login(cfg.login(), cfg.password());
         assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
     }
 

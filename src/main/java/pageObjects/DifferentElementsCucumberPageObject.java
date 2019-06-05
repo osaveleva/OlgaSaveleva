@@ -2,25 +2,19 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import enums.*;
+import io.cucumber.datatable.DataTable;
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.annotations.AfterClass;
 import utilities.Configuration;
 
 import java.util.List;
 
-import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
 
@@ -76,15 +70,14 @@ public class DifferentElementsCucumberPageObject {
     @FindBy(css = ".panel-body-list.logs > li")
     private ElementsCollection radioLogRecords;
 
-    @And("I click Different Elements submenu item")
-    public void clickDiffElementMenuItem() {
-        subCollection.findBy(text(SubMenuItems.DIFFERENT_ELEMENTS.getRecord())).click();
-    }
 
-    @When("I click (.+) checkbox")
-    public void checkCheckBox(String itemValue) {
-        checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
-        checkboxRow.findBy(text(itemValue)).lastChild().shouldBe(checked);
+    @When("I select nature elements below:")
+    public void clickNatureElements(DataTable dt) {
+        List<String> list = dt.asList(String.class);
+        for (String aList : list) {
+            checkboxRow.findBy(text(aList)).shouldBe(enabled).click();
+            checkboxRow.findBy(text(aList)).lastChild().shouldBe(checked);
+        }
     }
 
     @When("I unclick (.+) checkbox")
@@ -112,7 +105,7 @@ public class DifferentElementsCucumberPageObject {
 
     @Then("Four checkboxes are displayed")
     public void checkNatureCheckBox() {
-        checkboxCollection.shouldHaveSize(ElementsCheckBox.values().length);
+        checkboxCollection.shouldHaveSize(NatureElementsCheckBox.values().length);
     }
 
     @Then("Four radiobuttons are displayed")

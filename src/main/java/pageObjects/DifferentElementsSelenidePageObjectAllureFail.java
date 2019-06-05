@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.*;
 import static base.HomePageValues.*;
 
 
-public class ServiceSelenidePageObjectAllureFail {
+public class DifferentElementsSelenidePageObjectAllureFail {
     @FindBy(css = ".profile-photo")
     private SelenideElement profileButton;
 

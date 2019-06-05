@@ -5,23 +5,26 @@ import enums.*;
 import org.aeonbits.owner.ConfigFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pageObjects.ServiceSelenidePageObject;
+import pageObjects.DifferentElementsSelenidePageObject;
 import utilities.Configuration;
 
 import static com.codeborne.selenide.Selenide.open;
+import static enums.NatureElementsCheckBox.*;
+import static enums.LeftMenuItems.DIFFERENT_ELEMENTS;
+import static enums.LeftMenuItems.SERVICE;
 import static org.testng.Assert.assertEquals;
 
 
 public class ServicePageSelenide extends TestBaseSelenide {
 
-    private ServiceSelenidePageObject servicePage;
+    private DifferentElementsSelenidePageObject servicePage;
     private Configuration cfg;
 
     @BeforeClass
     public void beforeClass() {
 
         cfg = ConfigFactory.create(Configuration.class);
-        servicePage = open(cfg.url(), ServiceSelenidePageObject.class);
+        servicePage = open(cfg.url(), DifferentElementsSelenidePageObject.class);
 
     }
 
@@ -39,11 +42,12 @@ public class ServicePageSelenide extends TestBaseSelenide {
 
         // 4. Click on "Service" subcategory in the header and check that drop down contains options
         // TODO
+        servicePage.clickMenu(SERVICE);
         servicePage.checkServiceMenu();
 
         //5. Open through the header menu Service -> Different Elements Page
         // TODO
-        servicePage.clickDiffElementMenuItem();
+        servicePage.clickMenu(SERVICE, DIFFERENT_ELEMENTS);
 
         //6. Check interface on Different elements page, it contains all needed elements
         //6.1 Assert that there are 4 checkboxes
@@ -51,15 +55,15 @@ public class ServicePageSelenide extends TestBaseSelenide {
 
         //6.2. Assert that there are 4 radioButtons
         // TODO
-        servicePage.checkRadioButtonCollection();
+        servicePage.checkMetals();
 
         //6.3. Assert that there is 1 dropdown list
         // TODO
-        servicePage.checkDropDownCollection();
+        servicePage.checkColors();
 
         //6.4. Assert that there are 2 butttons
         // TODO
-        servicePage.checkButtonCollection();
+        servicePage.checkButtons();
 
         //7. Assert that there is Right Section
         servicePage.checkRightSection();
@@ -70,14 +74,14 @@ public class ServicePageSelenide extends TestBaseSelenide {
         //9. Select checkboxes
         // TODO 1. Method name
         // TODO 2. Parameter type, might be several of it
-        servicePage.checkCheckBox(ElementsCheckBox.WIND.getRecord());
-        servicePage.checkCheckBox(ElementsCheckBox.WATER.getRecord());
+        servicePage.clickNatureElements(WIND, WATER);
+       // servicePage.checkCheckBox(NatureElementsCheckBox.WATER.getRecord());
 
         //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
         servicePage.checkTrueCheckBoxLogRecords();
 
         //11. Select radio
-        servicePage.checkRadioButton(MetalsRadioButton.SELEN.getRecord());
+        servicePage.clickMetals(MetalsRadioButton.SELEN.getRecord());
 
         //12. Assert that for radiobutton there is a log row and value is corresponded to the status of radiobutton.
         servicePage.checkRadioButtonLogRecords();
@@ -92,8 +96,8 @@ public class ServicePageSelenide extends TestBaseSelenide {
         servicePage.checkDropDownLogRecords();
 
         //15. Unselect and assert checkboxes
-        servicePage.checkUnCheckBox(ElementsCheckBox.WIND.getRecord());
-        servicePage.checkUnCheckBox(ElementsCheckBox.WATER.getRecord());
+        servicePage.checkUnCheckBox(WIND.getRecord());
+        servicePage.checkUnCheckBox(NatureElementsCheckBox.WATER.getRecord());
 
         //16. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
         servicePage.checkFalseCheckBoxLogRecords();

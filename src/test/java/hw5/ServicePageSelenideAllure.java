@@ -10,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static base.HomePageValues.*;
-import pageObjects.ServiceSelenidePageObjectAllure;
+import pageObjects.DifferentElementsSelenidePageObjectAllure;
 import utilities.Configuration;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -21,14 +21,14 @@ import static org.testng.Assert.assertEquals;
 @Story("ServicePage testing")
 public class ServicePageSelenideAllure extends TestBaseSelenide {
 
-    private ServiceSelenidePageObjectAllure servicePage;
+    private DifferentElementsSelenidePageObjectAllure servicePage;
     private Configuration cfg;
 
     @BeforeClass
     public void beforeClass() {
 
         cfg = ConfigFactory.create(Configuration.class);
-        servicePage = open(cfg.url(), ServiceSelenidePageObjectAllure.class);
+        servicePage = open(cfg.url(), DifferentElementsSelenidePageObjectAllure.class);
     }
 
     @AfterClass
@@ -75,8 +75,8 @@ public class ServicePageSelenideAllure extends TestBaseSelenide {
         servicePage.checkLeftSection();
 
         //9. Select checkboxes
-        servicePage.checkCheckBox(ElementsCheckBox.WIND.getRecord());
-        servicePage.checkCheckBox(ElementsCheckBox.WATER.getRecord());
+        servicePage.checkCheckBox(NatureElementsCheckBox.WIND.getRecord());
+        servicePage.checkCheckBox(NatureElementsCheckBox.WATER.getRecord());
 
         //   //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
         servicePage.checkCheckBoxLogRecords();
