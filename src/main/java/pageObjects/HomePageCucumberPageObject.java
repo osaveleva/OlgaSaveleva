@@ -64,7 +64,6 @@ public class HomePageCucumberPageObject {
 
     @When("I click on {menu} button in Header")
     public void clickMenu(LeftMenuItems v) {
-        System.out.println(v.getRecord());
         menuCollection.findBy(text(v.getRecord())).click();
     }
 
