@@ -36,7 +36,7 @@ public class ServicePageSelenideAllureFail extends TestBaseSelenide {
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         WebDriverRunner.getWebDriver().close();
     }
 

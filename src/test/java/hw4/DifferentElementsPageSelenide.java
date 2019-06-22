@@ -15,7 +15,7 @@ import static enums.LeftMenuItems.SERVICE;
 import static org.testng.Assert.assertEquals;
 
 
-public class ServicePageSelenide extends TestBaseSelenide {
+public class DifferentElementsPageSelenide extends TestBaseSelenide {
 
     private DifferentElementsSelenidePageObject servicePage;
     private Configuration cfg;
@@ -75,7 +75,7 @@ public class ServicePageSelenide extends TestBaseSelenide {
         // TODO 1. Method name
         // TODO 2. Parameter type, might be several of it
         servicePage.clickNatureElements(WIND, WATER);
-       // servicePage.checkCheckBox(NatureElementsCheckBox.WATER.getRecord());
+        // servicePage.checkCheckBox(NatureElementsCheckBox.WATER.getRecord());
 
         //10. Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
         servicePage.checkTrueCheckBoxLogRecords();

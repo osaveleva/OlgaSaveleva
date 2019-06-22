@@ -3,6 +3,7 @@ package hw4;
 import base.TestBaseSelenide;
 import enums.SubMenuItems;
 import org.aeonbits.owner.ConfigFactory;
+import pageObjects.HomePageObject;
 import utilities.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -53,25 +54,28 @@ public class DatesPageSelenide extends TestBaseSelenide {
         datePage.checkSliderPosition(0, 100);
 
         //7. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datePage.checkLogs("0", "100");
+        datePage.checkLogs(0, 100);
 
         //8. Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most left position.
         datePage.moveSlider(0, 0);
+        datePage.checkSliderPosition(0, 0);
 
         //9. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datePage.checkLogs("0", "0");
+        datePage.checkLogs(0, 0);
 
         //10. Using drag-and-drop set Range sliders. left sliders - the most rigth position, right slider - the most rigth position.
         datePage.moveSlider(100, 100);
+        datePage.checkSliderPosition(100, 100);
 
         //11. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datePage.checkLogs("100", "100");
+        datePage.checkLogs(0, 0);
 
         //12. Using drag-and-drop set Range sliders.
         datePage.moveSlider(30, 70);
+        datePage.checkSliderPosition(30, 70);
         datePage.from.click(); //It's a workaround. May be a bug in application.
 
         //13. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datePage.checkLogs("30", "70");
+        datePage.checkLogs(30, 70);
     }
 }

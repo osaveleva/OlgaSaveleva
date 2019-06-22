@@ -9,7 +9,9 @@ import org.aeonbits.owner.ConfigFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import static base.HomePageValues.*;
+
 import pageObjects.DifferentElementsSelenidePageObjectAllure;
 import utilities.Configuration;
 
@@ -32,7 +34,7 @@ public class ServicePageSelenideAllure extends TestBaseSelenide {
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         WebDriverRunner.getWebDriver().close();
     }
 

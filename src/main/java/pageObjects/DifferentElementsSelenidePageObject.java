@@ -182,7 +182,7 @@ public class DifferentElementsSelenidePageObject {
         checkboxLogRecords.findBy(text(LogRecordsElementsCheckBox.getRecord("Wind", "false"))).shouldBe(visible);
     }
 
-    public void checkTitle(){
+    public void checkTitle() {
         assertEquals(getWebDriver().getTitle(), MAIN_DRIVER_TITLE);
     }
 

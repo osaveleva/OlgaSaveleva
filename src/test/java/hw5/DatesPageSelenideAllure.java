@@ -10,6 +10,7 @@ import pageObjects.DatesSelenidePageObjectAllure;
 import utilities.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import static base.HomePageValues.*;
 
 
@@ -33,7 +34,7 @@ public class DatesPageSelenideAllure extends TestBaseSelenide {
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         WebDriverRunner.getWebDriver().close();
     }
 

@@ -49,7 +49,7 @@ public class DatesSelenidePageObjectAllure {
     @FindBy(css = ".panel-body-list > li")
     private ElementsCollection logCollection;
 
-    @Step("Login as ${name}:${password}" )
+    @Step("Login as ${name}:${password}")
     public void login(String name, String password) {
         profileButton.click();
         nameField.sendKeys(name);

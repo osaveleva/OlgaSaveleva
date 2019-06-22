@@ -111,9 +111,9 @@ public class DatesSelenidePageObject {
     }
 
     // TODO Parameters should be 'int'
-    public void checkLogs(String fromValue, String toValue) {
-        logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("From", fromValue))).shouldBe(visible);
-        logCollection.findBy(text(LogRecordsFromTo.getRecord1("To", toValue))).shouldBe(visible);
+    public void checkLogs(int fromValue, int toValue) {
+        logCollection.findBy(text(LogRecordsFromTo.TEMPLATE.getRecord("From", String.valueOf(fromValue)))).shouldBe(visible);
+        logCollection.findBy(text(LogRecordsFromTo.getRecord1("To", String.valueOf(toValue)))).shouldBe(visible);
     }
 
     public void checkTitle() {
