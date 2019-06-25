@@ -14,7 +14,7 @@ import java.util.Locale;
 import static enums.Credentials.PETER_CHAILOVSKII;
 import static java.util.Locale.ENGLISH;
 
-public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
+public class TypeRegistryConfiguration implements TypeRegistryConfigurer  {
     @Override
     public void configureTypeRegistry(TypeRegistry typeRegistry) {
 

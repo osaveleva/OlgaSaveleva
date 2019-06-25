@@ -4,3 +4,7 @@ OlgaSaveleva.iml
 HomePageTest.java
 testngTest.xml
 TestList.java
+.allure\
+.idea\
+build\
+target\
