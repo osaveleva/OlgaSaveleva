@@ -8,6 +8,7 @@ import enums.*;
 import io.cucumber.datatable.DataTable;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.support.FindBy;
+import org.testng.annotations.AfterMethod;
 import utilities.Configuration;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static org.testng.Assert.assertEquals;
 
 
@@ -71,19 +73,18 @@ public class DifferentElementsCucumberPageObject {
     private ElementsCollection radioLogRecords;
 
 
-    @When("I select nature elements below:")
+    @When("I (select)(unclick) nature elements below:")
     public void clickNatureElements(DataTable dt) {
         List<String> list = dt.asList(String.class);
         for (String aList : list) {
-            checkboxRow.findBy(text(aList)).shouldBe(enabled).click();
-            checkboxRow.findBy(text(aList)).lastChild().shouldBe(checked);
+            if (!checkboxRow.findBy(text(aList)).lastChild().is(checked)) {
+                checkboxRow.findBy(text(aList)).shouldBe(enabled).click();
+                checkboxRow.findBy(text(aList)).lastChild().shouldBe(checked);
+            } else {
+                checkboxRow.findBy(text(aList)).shouldBe(enabled).click();
+                checkboxRow.findBy(text(aList)).lastChild().shouldNotBe(checked);
+            }
         }
-    }
-
-    @When("I unclick (.+) checkbox")
-    public void checkUnCheckBox(String itemValue) {
-        checkboxRow.findBy(text(itemValue)).shouldBe(enabled).click();
-        checkboxRow.findBy(text(itemValue)).lastChild().shouldNotBe(checked);
     }
 
     @When("I click radiobutton (.+)")
@@ -147,5 +148,6 @@ public class DifferentElementsCucumberPageObject {
     public void checkDropDownLogRecords(String color) {
         checkboxLogRecords.findBy(text(LogRecordsDropDown.getRecord(color))).shouldBe(visible);
     }
+
 }
 

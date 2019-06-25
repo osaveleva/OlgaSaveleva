@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static java.lang.System.setProperty;
 
-@CucumberOptions(features = "src/test/resources/features/hw6/UserTablePageCucumberTest.feature", glue = {"pageObjects", "classpath:com/example"})
+@CucumberOptions(features = "src/test/resources/features/hw6", glue = {"pageObjects"})
 public class CucumberTestngRunner extends AbstractTestNGCucumberTests {
     private utilities.Configuration cfg = ConfigFactory.create(utilities.Configuration.class);
 

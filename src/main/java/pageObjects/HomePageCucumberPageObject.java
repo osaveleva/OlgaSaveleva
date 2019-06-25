@@ -10,12 +10,14 @@ import enums.LeftMenuItems;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.annotations.AfterMethod;
 import utilities.Configuration;
 
 import static base.HomePageValues.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.testng.Assert.assertEquals;
 
@@ -23,7 +25,7 @@ public class HomePageCucumberPageObject {
     private Configuration cfg = ConfigFactory.create(Configuration.class);
 
     public HomePageCucumberPageObject() {
-        //open(cfg.url());
+         open(cfg.url());
         page(this);
     }
 
@@ -48,7 +50,7 @@ public class HomePageCucumberPageObject {
     @FindBy(css = ".sub > li")
     private ElementsCollection subCollection;
 
-    @And("Login as {peter}")
+    @And("Login as \"([^\"]*)\"$")
     public void i_supply_enum_value(Credentials credentials) {
         profileButton.click();
         nameField.sendKeys(credentials.getLogin());
@@ -57,12 +59,12 @@ public class HomePageCucumberPageObject {
         userName.shouldHave(text(USER_NAME));
     }
 
-    @When("I click on {menu} button in submenu")
+   @When("I click on \"([^\"]*)\" button in submenu")
     public void clickServicetMenuItem(LeftMenuItems value) {
         subCollection.findBy(text(value.getRecord())).click();
     }
 
-    @When("I click on {menu} button in Header")
+    @When("I click on \"([^\"]*)\" button in Header")
     public void clickMenu(LeftMenuItems v) {
         menuCollection.findBy(text(v.getRecord())).click();
     }
