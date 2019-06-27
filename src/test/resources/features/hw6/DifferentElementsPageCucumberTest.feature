@@ -16,8 +16,8 @@ Feature: Different Elements Page Test
     Then Right section is displayed
   # TODO Should be List<Enum>
     When I select nature elements below:
-      | WATER |
-      | WIND  |
+      | Water |
+      | Wind  |
   # !TODO
     Then Log for Water element with true status is displayed in log section
     Then Log for Wind element with true status is displayed in log section
@@ -27,8 +27,8 @@ Feature: Different Elements Page Test
     Then Yellow color is selected in dropdown list
     Then Log for Yellow color in dropdown list is displayed in log section
     When I unclick nature elements below:
-      | WATER |
-      | WIND  |
+      | Water |
+      | Wind  |
     Then Log for Water element with false status is displayed in log section
     Then Log for Wind element with false status is displayed in log section
 
