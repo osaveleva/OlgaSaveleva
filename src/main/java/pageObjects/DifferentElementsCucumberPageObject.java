@@ -74,8 +74,11 @@ public class DifferentElementsCucumberPageObject {
 
 
     @When("I (select)(unclick) nature elements below:")
-    public void clickNatureElements(DataTable dt) {
-        List<String> list = dt.asList(String.class);
+    public void clickNatureElements(List<NatureElementsCheckBox> natureElements) {
+        int a = 0;
+        int b = 10;
+        int c = 9;
+       /* List<String> list = dt.asList(String.class);
         for (String aList : list) {
             if (!checkboxRow.findBy(text(aList)).lastChild().is(checked)) {
                 checkboxRow.findBy(text(aList)).shouldBe(enabled).click();
@@ -84,7 +87,9 @@ public class DifferentElementsCucumberPageObject {
                 checkboxRow.findBy(text(aList)).shouldBe(enabled).click();
                 checkboxRow.findBy(text(aList)).lastChild().shouldNotBe(checked);
             }
-        }
+        }*/
+
+
     }
 
     @When("I click radiobutton (.+)")
